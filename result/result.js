@@ -327,7 +327,7 @@ function renderTours(tours) {
               ${dateGenerator(tour.startDate)}
             </div>
           </div>
-        </div>
+        
 
         <div class="tour-card-meta">
           <div class="tour-duration"> 
@@ -345,6 +345,7 @@ function renderTours(tours) {
             <ion-icon name="alert-circle-outline"></ion-icon>
             شامل حمل و نقل، اقامت و خدمات تور
           </div>
+      </div>
       </div>
 
     </a>
