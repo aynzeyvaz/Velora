@@ -144,127 +144,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-// Special tours
 
-const specialTours= [
-  {
-    cover: "../assets/images/specialtours/international/paris.jpg",
-    badge: "ویژه",
-    country: "تور فرانسه",
-    city: "پاریس",
-    startDate: "2025-07-22",
-    duration: "9",
-    price: "65300000"
-  },
-  {
-  cover: "../assets/images/specialtours/international/bankok.jpg",
-  badge: "ویژه",
-  country: "تور تایلند",
-  city: "بانکوک",
-  startDate: "2025-07-22",
-  duration: "3",
-  price: "76200000"
-},
-  {
-  cover: "../assets/images/specialtours/international/dubai.jpg",
-  badge: "ویژه",
-  country: "تور امارات",
-  city: "دوبی",
-  startDate: "2025-07-22",
-  duration: "5",
-  price: "58200000"
-},
-  {
-  cover: "../assets/images/specialtours/international/istanbul.jpg",
-  badge: "ویژه",
-  country: "تور ترکیه",
-  city: "استانبول",
-  startDate: "2025-07-22",
-  duration: "11",
-  price: "56700000"
-},
-  {
-  cover: "../assets/images/specialtours/international/venice.jpg",
-  badge: "ویژه",
-  country: "تور ایتالیا",
-  city: "ونیز",
-  startDate: "2025-07-22",
-  duration: "8",
-  price: "62150000"
-},
-  {
-  cover: "../assets/images/specialtours/international/antalya.jpg",
-  badge: "ویژه",
-  country: "تور ترکیه",
-  city: "آنتالیا",
-  startDate: "2025-07-22",
-  duration: "4",
-  price: "45900000"
-},
-  {
-  cover: "../assets/images/specialtours/international/antalya.jpg",
-  badge: "ویژه",
-  country: "تور ترکیه",
-  city: "آنتالیا",
-  startDate: "2025-07-22",
-  duration: "4",
-  price: "45900000"
-},
-  {
-  cover: "../assets/images/specialtours/international/antalya.jpg",
-  badge: "ویژه",
-  country: "تور ترکیه",
-  city: "آنتالیا",
-  startDate: "2025-07-22",
-  duration: "4",
-  price: "45900000"
-},
-  {
-  cover: "../assets/images/specialtours/international/antalya.jpg",
-  badge: "ویژه",
-  country: "تور ترکیه",
-  city: "آنتالیا",
-  startDate: "2025-07-22",
-  duration: "4",
-  price: "45900000"
-},
-  {
-  cover: "../assets/images/specialtours/international/antalya.jpg",
-  badge: "ویژه",
-  country: "تور ترکیه",
-  city: "آنتالیا",
-  startDate: "2025-07-22",
-  duration: "4",
-  price: "45900000"
-},
-  {
-  cover: "../assets/images/specialtours/international/antalya.jpg",
-  badge: "ویژه",
-  country: "تور ترکیه",
-  city: "آنتالیا",
-  startDate: "2025-07-22",
-  duration: "4",
-  price: "45900000"
-},
-  {
-  cover: "../assets/images/specialtours/international/antalya.jpg",
-  badge: "ویژه",
-  country: "تور ترکیه",
-  city: "آنتالیا",
-  startDate: "2025-07-22",
-  duration: "4",
-  price: "45900000"
-},
-  {
-  cover: "../assets/images/specialtours/international/antalya.jpg",
-  badge: "ویژه",
-  country: "تور ترکیه",
-  city: "آنتالیا",
-  startDate: "2025-07-22",
-  duration: "4",
-  price: "45900000"
-}
-];
 
 // function generateDate(date) {
 
@@ -273,31 +153,6 @@ const specialTours= [
 
 
 
-// filter
-
-let filteredTours = specialTours;   //یعدا اینو بیار تو api
-
-function filterTours(type) {
-  let sorted=[...filteredTours];
-
-  if (type==="cheap") {
-    sorted.sort((a,b) => a.price - b.price);
-
-  }
-  else if (type==="expensive") {
-    sorted.sort((a,b)=> b.price - a.price)
-  }
-
-  else if (type==="duration") {
-    sorted.sort((a,b) => b.duration - a.duration);
-  }
-  else if (type==="default") {
-    sorted=[...specialTours]
-  }
-
-  filteredTours= sorted;
-  renderTours(filteredTours);
-}
 
 const filters =document.querySelector("[data-filters]");
 const filterToggle=document.querySelector("[data-filter-toggle]");
@@ -314,10 +169,12 @@ filterToggle.addEventListener("click", ()=> {
 });
 
 
-const sortRadios= document.querySelectorAll('input[name="sort"]');
+
+const sortRadios = document.querySelectorAll('input[name="sort"]');
+
 sortRadios.forEach(radio => {
   radio.addEventListener("change", function() {
-    filterTours(radio.value);
+    fetchResults(this.value);
   });
 });
 
@@ -383,11 +240,42 @@ const observer = new IntersectionObserver((entries, observer) => {
 });
 
 const toursGrid = document.querySelector(".tours-grid");
+let tours = [];
 
-function renderTours(filteredTours) {
+// API Results
+
+
+const results_Api= "https://velora-1-cbh9.onrender.com/api/search/result/";
+
+async function fetchResults(sort="") {
+
+  let url = results_Api
+  if (sort) {
+    url+= `?sort=${sort}`
+  }
+
+  try {
+    const response= await fetch(url);
+    if (!response.ok) {
+      throw new Error("failed ")
+    }
+
+    tours= await response.json();
+    renderTours(tours);
+  }
+  catch (err) {
+    console.error(err);
+  }
+}
+
+
+
+
+
+function renderTours(tours) {
   toursGrid.innerHTML = ``;
   const fragment = document.createDocumentFragment();
-  filteredTours.forEach((tour, index) => {
+  tours.forEach((tour, index) => {
 
     const card = document.createElement("div");
     card.classList.add("tour-card");
@@ -402,18 +290,19 @@ function renderTours(filteredTours) {
 
         <div class="tour-card-content">
           <div class="tour-card-header">
-           <h3 class="tour-card-header-title">${titleGenerator(tour.country, tour.city)}</h3>
-          <div class="tour-card-header-start">
-            ${dateGenerator(tour.startDate)}
+            <h3 class="tour-card-header-title">${titleGenerator(tour.country, tour.city)}</h3>
+            <div class="tour-card-header-start">
+              ${dateGenerator(tour.startDate)}
+            </div>
           </div>
-        
         </div>
 
         <div class="tour-card-meta">
           <div class="tour-duration"> 
             <img class="icon" src="../assets/icon/duration.svg" height="38" alt="logo">
-            ${durationGenerator(tour.duration)} </div>
+            ${durationGenerator(tour.duration)} 
           </div>
+        </div>
         
     
         <div class="tour-card-price"> 
@@ -423,7 +312,8 @@ function renderTours(filteredTours) {
           <div class="tour-card-attention">
             <ion-icon ion-icon name="alert-circle-outline"></ion-icon>
             شامل حمل و نقل، اقامت و خدمات تور
-            </div>
+          </div>
+      </div>
 
     </a>
 
@@ -441,5 +331,4 @@ function renderTours(filteredTours) {
 
 }
 
-
-renderTours(filteredTours);
+fetchResults()
