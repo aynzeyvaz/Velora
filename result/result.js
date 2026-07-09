@@ -1,3 +1,4 @@
+
 const loader = document.getElementById("preloader");
 
 document.body.style.overflow = "hidden";
@@ -174,7 +175,7 @@ const sortRadios = document.querySelectorAll('input[name="sort"]');
 
 sortRadios.forEach(radio => {
   radio.addEventListener("change", function() {
-    fetchResults(this.value);
+    fetchSearchTours(this.value);
   });
 });
 
@@ -240,34 +241,65 @@ const observer = new IntersectionObserver((entries, observer) => {
 });
 
 const toursGrid = document.querySelector(".tours-grid");
-let tours = [];
+
 
 // API Results
 
 
 const results_Api= "https://velora-1-cbh9.onrender.com/api/search/result/";
 
-async function fetchResults(sort="") {
 
-  let url = results_Api
-  if (sort) {
-    url+= `?sort=${sort}`
+
+const urlParams = new URLSearchParams(window.location.search);
+const origin = urlParams.get("origin");
+const destination= urlParams.get("destination");
+const month=urlParams.get("month");
+
+async function fetchSearchTours(sort=""){
+  toursGrid.innerHTML = `
+  <div class="loader">
+  در حال جستجو...
+  </div>`;
+  const params = new URLSearchParams({
+    origin, destination, month
+  });
+
+  if(sort){
+    params.append("sort", sort);
   }
 
+  let apiUrl =
+  `${results_Api}?${params.toString()}`;
+
+
   try {
-    const response= await fetch(url);
+    const response= await fetch(apiUrl);
+
     if (!response.ok) {
-      throw new Error("failed ")
+      throw new Error("faileld");
     }
 
-    tours= await response.json();
-    renderTours(tours);
+    const data= await response.json();
+
+    if(data.count === 0){
+
+      toursGrid.innerHTML = `
+        <p class="no-results">
+          متاسفانه توری با این مشخصات پیدا نشد.
+        </p>
+      `;
+
+      return;
+    
+
+  }
+
+    renderTours(data.result);
   }
   catch (err) {
     console.error(err);
   }
-}
-
+  }
 
 
 
@@ -310,7 +342,7 @@ function renderTours(tours) {
         </div>
 
           <div class="tour-card-attention">
-            <ion-icon ion-icon name="alert-circle-outline"></ion-icon>
+            <ion-icon name="alert-circle-outline"></ion-icon>
             شامل حمل و نقل، اقامت و خدمات تور
           </div>
       </div>
@@ -331,4 +363,5 @@ function renderTours(tours) {
 
 }
 
-fetchResults()
+
+fetchSearchTours();
