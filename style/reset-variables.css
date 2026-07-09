@@ -24,6 +24,7 @@
   /* text color */
   --text-white: hsl(0, 0%, 100%);
   --text-gunmetal: #333;
+  --text-footer: #cbd5e1;
   /* --text-gunmetal: hsl(209, 40%, 14%); */
   --text-price: #e21388;
   --text-granite-gray: hsl(210, 4%, 38%);
