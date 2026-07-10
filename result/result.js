@@ -1,10 +1,10 @@
 
-const loader = document.getElementById("preloader");
+const pageLoader = document.getElementById("preloader");
 
 document.body.style.overflow = "hidden";
 
 window.addEventListener("load", () => { 
-  loader.classList.add("hidden");
+  pageLoader.classList.add("hidden");
   document.body.style.overflow = "auto";
 });
 
@@ -241,6 +241,7 @@ const observer = new IntersectionObserver((entries, observer) => {
 });
 
 const toursGrid = document.querySelector(".tours-grid");
+const apiLoader= document.querySelector(".api-loader");
 
 
 // API Results
@@ -256,10 +257,9 @@ const destination= urlParams.get("destination");
 const month=urlParams.get("month");
 
 async function fetchSearchTours(sort=""){
-  toursGrid.innerHTML = `
-  <div class="loader">
-  در حال جستجو...
-  </div>`;
+
+  toursGrid.classList.add("loading");
+  apiLoader.classList.add("active");
   const params = new URLSearchParams({
     origin, destination, month
   });
@@ -280,6 +280,7 @@ async function fetchSearchTours(sort=""){
     }
 
     const data= await response.json();
+    
 
     if(data.count === 0){
 
@@ -298,10 +299,14 @@ async function fetchSearchTours(sort=""){
   }
   catch (err) {
     console.error(err);
+    
   }
-  }
+  finally {
+   apiLoader.classList.remove("active");
+   toursGrid.classList.remove("loading");
+}
 
-
+}
 
 
 function renderTours(tours) {

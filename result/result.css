@@ -98,7 +98,7 @@ section {
 /* PRELOADER */
 
 #preloader {
-  background: #ffffff url(../assets/images/preloader.svg) no-repeat center center;
+ background: #ffffff url(../assets/images/preloader.svg) no-repeat center center;
   background-size: 30% ;
   height: 100vh;
   width: 100%;
@@ -117,8 +117,32 @@ section {
 }
 /* Header */
 
- 
+ /* tours grid loading */
+ .tours-grid.loading {
+ opacity:0.4;
+ pointer-events:none;
+}
 
+
+/* API LOADER */
+
+.api-loader {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+}
+.api-loader.active {
+  display: flex;
+}
+
+.api-loader img {
+  width: 200px;
+  height: 200px;
+}
+
+
+/* Header */
 
 .header .container {
   display: flex;
