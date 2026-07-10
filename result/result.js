@@ -1,4 +1,7 @@
-
+const urlParams = new URLSearchParams(window.location.search);
+const origin = urlParams.get("origin");
+const destination= urlParams.get("destination");
+const month=urlParams.get("month");
 const pageLoader = document.getElementById("preloader");
 
 document.body.style.overflow = "hidden";
@@ -58,27 +61,6 @@ window.addEventListener("scroll", () => {
 
 // Hero Section 
 
-const heroBgs = [ 
-  { 
-    image:"../assets/images/testresultimg/venice1.jpg",
-  },
-
-  {
-     image:"../assets/images/testresultimg/venice2.jpg",
-
-  },
-
-  { 
-    image:"../assets/images/testresultimg/venice3.jpg",
-
-  },
-
-  {
-   image:"../assets/images/testresultimg/venice4.jpg" ,
-  }
-  
-  ];
-
 
 
 const bg1 = document.querySelector(".hero-bg-1");
@@ -91,16 +73,58 @@ let count = 0;
 let activeBg = bg1;
 let inactiveBg= bg2;
 
+// hero background API
 
-function changeHero() {
+let destinationName = "";
+const heroImagesApi= "https://velora-1-cbh9.onrender.com/api/search/hero/";
 
-  const currentBg = heroBgs[count];
-  count = (count +1) % heroBgs.length;
+async function fetchHeroImages() {
+  try {
+     const params = new URLSearchParams({
+      destination
+    });
+
+
+    const response = await fetch(
+      `${heroImagesApi}?${params.toString()}`
+    );
+
+
+    if(!response.ok) {
+      throw new Error("failed");
+    }
+
+
+    const data = await response.json();
+    destinationName = data.destination;
+
+    updateResultTitle(destinationName);
+    startHeroSlider(data.heroImages);
+  }
+  catch(err) {
+    console.log(err);
+  }
+}
+
+//start hero slider 
+
+function startHeroSlider(images) {
+   changeHero(images);
+  setInterval(() => {
+    changeHero(images);
+  }, 8000);
+}
+
+// change hero
+function changeHero(images) {
+
+  const currentBg = images[count];
+  count = (count +1) % images.length;
   
 
   [activeBg, inactiveBg] = [inactiveBg, activeBg]
 
-  inactiveBg.style.backgroundImage =`url(${currentBg.image})`;
+  inactiveBg.style.backgroundImage =`url(${currentBg})`;
 
   inactiveBg.classList.add("active");
   inactiveBg.classList.remove("inactive");
@@ -124,25 +148,23 @@ function changeHero() {
   
 }
 
-
-setInterval(changeHero , 8000);
-changeHero();
+fetchHeroImages();
 
 
 
-//hero title
+//result title
 
-document.addEventListener("DOMContentLoaded", () => {
-  const heroTitle = document.getElementById("result-tours-title-h2");
+function updateResultTitle(destination) {
+  const resultTitle = document.getElementById("result-tours-title-h2");
 
-  const pageData = {
-    searchTitle: "ایتالیا"
-  };
-
-  if (heroTitle) {
-    heroTitle.textContent = `تورهای ${pageData.searchTitle}`;
+  if (resultTitle) {
+    resultTitle.textContent = `تورهای ${destinationName}`;
   }
-});
+ 
+}
+
+
+
 
 
 
@@ -251,10 +273,10 @@ const results_Api= "https://velora-1-cbh9.onrender.com/api/search/result/";
 
 
 
-const urlParams = new URLSearchParams(window.location.search);
-const origin = urlParams.get("origin");
-const destination= urlParams.get("destination");
-const month=urlParams.get("month");
+// const urlParams = new URLSearchParams(window.location.search);
+// const origin = urlParams.get("origin");
+// const destination= urlParams.get("destination");
+// const month=urlParams.get("month");
 
 async function fetchSearchTours(sort=""){
 
