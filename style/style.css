@@ -104,156 +104,6 @@
   pointer-events: none;
 
 }
-/* Header */
-
- 
-
-
-.header .container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 40px;
-}
-
-.header {
-  padding-block : 30px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 4;
-}
-
-.header.active {
-  position: fixed;
-  background-color: var(--bg-lavender-blush);
-  box-shadow: var(--shadow-1);
-  animation: slideIn 500ms ease forwards;
-}
-.header.active .navbar-link {
-  color: var(--text-gunmetal)
-}
-
-@keyframes slideIn {
-  0% { transform: translateY(-100%);}
-  100% { transform: translateY(0);}
-
-}
-
-.header .logo img { width: 160px; }
-
-.nav-toggle-btn { font-size: 3.2rem; }
-
-.navbar {
-  padding-bottom: 10px;
-  position: fixed;
-  top: 0;
-  right: -350px;
-  max-width: 350px;
-  width:100%;
-  height: 100vh;
-  background-color: var(--bg-white);
-  display: flex;
-  flex-direction: column;
-  z-index: 1;
-  transition: 400ms var(--cubic-out);
-  visibility: hidden;
-
-}
-
-.navbar.active {
-  background-color: var(--bg-lavender-blush);
-  transform: translateX(-350px);
-  transition-duration: 500ms;
-  visibility: visible;
-}
-
-.navbar.active .navbar-link {
-  color: var(--text-gunmetal);
-}
-
-.navbar-top {
-  
-  padding: 30px 16px;
-  display: flex;
-  justify-content: space-between;
-  /* align-items: center; */
-}
-.navbar-list {
-  /* margin-block-start: 30px; */
-  padding-right: 24px;
-  
-
-}
-
-.navbar-link {
-  position: relative;
-  color: var(--text-white);
-  font-size: var(--fs-7);
-  font-weight: var(--fw-medium);
-  padding-block: 8px;
-  transition: var(--transition-1);
-}
-
-.navbar-link::before {
-  content: "";
-  position: absolute;
-  width: 4px;
-  height: 12px;
-  right: auto;
-  left: 0;
-  background-color: var(--bg-majorelle-blue);
-  top: 50%;
-  
-  transform: translateY(-50%);
-  border-radius: 5px;
-  opacity: 0;
-  transition: var(--transition-1)
-}
-
-.navbar-link:is(:hover, :focus-visible, .active)::before {
-  opacity: 1;
- }
-
- .navbar-link:is(:hover, :focus-visible, .active) { transform: translateX(10px); }
-
-
-
- .header-action{  
-  margin-block-start:auto;
-  padding-block-start: 20px;
-  border-block-start: 1px solid var(--border-gainsboro);
- }
- .header-action .loggedout, .header-action .loggedin {
-    display: flex;
-    gap: 12px;
-    align-items: center ;
-    justify-content: space-around;
- }
-
-
- .header-action .loggedin {
-  display: none;
- }
-
- .overlay {
-  position: fixed;
-  top:0;
-  left:0;
-  bottom:0;
-  width: 100%;
-  background-color: var(--bg-white);
-  opacity: 0.5;
-  visibility: hidden;
-  transition: var(--transition-1);
-}
-
-.overlay.active {
-  visibility: visible;
-  opacity: 0.5;
-} 
-
 
 /* Hero Section */
 
@@ -704,16 +554,6 @@
   }
 
 
-  /**
-    *Header
-    */
-
-    /* .navbar {
-      padding-inline: 40px;
-      padding-block-start: 40px;
-    } */
-
-
 }
 
 
@@ -752,50 +592,7 @@
     max-width: 950px;
   }
 
-  /**
-  * Header
-  */
   
-  .nav-toggle-btn,
-  .navbar-top,
-  .overlay {
-    display: none;
-  }
-
-  .navbar,
-  .navbar.active {
-    all: unset;
-    display: flex;
-    align-items: center;
-    flex-grow: 1;
-  }
-
-  .navbar-list {
-    margin-block-start: 0;
-    display: flex;
-    gap: 30px;
-    margin-inline: auto ;
-  }
-
-  .navbar-link:is(:hover, :focus-visible, .active) { transform: unset;}
-
-  .navbar-link::before {
-    width: 12px;
-    height: 4px;
-    top: auto;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-  .header-action, .header-action .loggedout, .header-action .loggedin {
-    border: none;
-    padding-block-start: 0;
-    gap: 30px;
-  }
-
-  .header.active { padding-block: 15px;}
-
-
 }
 
 @media (min-width: 1200px) {
@@ -820,19 +617,6 @@
     max-width: 1150px;
   }
 
-  /**
-  * Header
-  */
-
-  .header .logo img { width: 180px;}
-
-  .navbar-list { gap: 50px;}
-
-  .header-action, .header-action .loggedout, .header-action .loggedin { gap: 40px;}
-  
-
-
-
 }
 
 @media (min-width: 1400px) {
@@ -855,10 +639,6 @@
     max-width: 1350px;
   }
 
-  /**
-  * Header
-  */
 
-  .navbar-list { gap: 70px;}
 
 }
