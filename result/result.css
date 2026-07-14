@@ -473,7 +473,7 @@ section {
 }
 
 .tour-card:hover .tour-card-image img {
-  transform: scale(1.15);
+  transform: scale(1.08);
   transition: transform .6s ease;
 }
 
