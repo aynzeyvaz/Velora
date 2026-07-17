@@ -316,3 +316,303 @@ renderTours();
 
 
 
+// populR DESTINATION 
+
+const destinations = [
+
+{
+    name:"کیش",
+    tours:"۲۵ تور",
+    image:"../assets/images/category1.jpg"
+},
+
+{
+    name:"استانبول",
+    tours:"۱۸ تور",
+    image:"../assets/images/category2.jpg"
+},
+
+{
+    name:"دبی",
+    tours:"۱۲ تور",
+    image:"../assets/images/category3.jpg"
+},
+
+{
+    name:"شیراز",
+    tours:"۲۰ تور",
+    image:"../assets/images/category4.jpg"
+}
+
+];
+
+
+const destinationsGrid = document.querySelector(".destinations-grid");
+
+
+function renderDestinations(){
+
+
+  destinationsGrid.innerHTML="";
+
+
+  destinations.forEach(destination=>{
+
+
+  const card=document.createElement("div");
+
+  card.classList.add("destination-card");
+
+
+  card.innerHTML=`
+
+  <img src="${destination.image}"
+  alt="${destination.name}">
+
+
+  <div class="destination-overlay">
+
+      <h3>
+      ${destination.name}
+      </h3>
+
+
+      <span>
+      ${destination.tours}
+      </span>
+
+
+  </div>
+
+  `;
+
+
+  destinationsGrid.appendChild(card);
+
+
+  });
+
+
+}
+
+
+renderDestinations();
+
+
+// category
+
+const categories = [
+
+{
+    id:1,
+    title:"تورهای خارجی",
+    image:"../assets/images/category1.jpg",
+    options:[
+        "ترکیه",
+        "امارات",
+        "گرجستان",
+        "ارمنستان",
+        "تایلند",
+        "فرانسه",
+        "ایتالیا",
+        "سوئد",
+        "سوئیس",
+        "آلمان",
+        "اسپانیا",
+        "اندونزی",
+        "مالزی"
+    ]
+},
+
+{
+    id:2,
+    title:"تورهای داخلی",
+    image:"../assets/images/category2.jpg",
+    options:[
+        "کیش",
+        "قشم",
+        "مشهد",
+        "شیراز",
+        "اصفهان",
+        "چابهار"
+    ]
+},
+
+{
+    id:3,
+    title:"تورهای یک روزه",
+    image:"../assets/images/category3.jpg",
+    options:[
+        "ماسال",
+        "قلعه بابک",
+        "کندوان",
+        "آبشار لاتون",
+        "کویر مرنجاب"
+    ]
+},
+
+{
+    id:4,
+    title:"تورهای ناشناس",
+    image:"../assets/images/category4.jpg",
+    options:[
+        "روستاهای بکر",
+        "جزایر ناشناخته",
+        "جنگل‌های شمال",
+        "کوهستان",
+        "دریاچه‌های مخفی"
+    ]
+}
+
+];
+
+const categoriesGrid = document.querySelector(".categories-grid");
+
+function renderCategories(){
+
+    categoriesGrid.innerHTML="";
+
+    categories.forEach(category=>{
+
+        const card=document.createElement("article");
+
+        card.className="category-card";
+
+        card.innerHTML=`
+
+            <div class="category-image">
+
+                <img
+                    src="${category.image}"
+                    alt="${category.title}"
+                >
+
+                <div class="category-overlay">
+
+                    <div class="category-title">
+                        <h3>${category.title}</h3>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="category-options">
+
+                ${category.options.map(item=>`
+                    <a href="#">${item}</a>
+                `).join("")}
+
+            </div>
+
+        `;
+
+        categoriesGrid.appendChild(card);
+
+    });
+
+}
+
+renderCategories();
+
+
+// reviews
+
+const reviews = [
+  {
+    id: 1,
+    name: "سارا احمدی",
+    tour: "تور استانبول",
+    rate: 5,
+    text: "رزرو خیلی راحت بود و همه چیز دقیقاً مطابق برنامه انجام شد. تجربه فوق‌العاده‌ای داشتم."
+  },
+
+  {
+    id: 2,
+    name: "علی رضایی",
+    tour: "تور کیش",
+    rate: 5,
+    text: "پشتیبانی ولورا واقعاً عالی بود و در تمام مراحل کنارم بودند."
+  },
+
+  {
+    id: 3,
+    name: "نگار محمدی",
+    tour: "تور دبی",
+    rate: 4,
+    text: "هتل و پرواز کیفیت خیلی خوبی داشت. قطعاً دوباره با ولورا سفر می‌کنم."
+  },
+
+  {
+    id: 4,
+    name: "محمد کریمی",
+    tour: "تور شیراز",
+    rate: 5,
+    text: "هم قیمت مناسب بود هم برنامه سفر دقیق و بدون دردسر پیش رفت."
+  }
+];
+
+function generateStars(rate){
+
+    let stars = "";
+
+    for(let i = 1; i <= 5; i++){
+
+        stars += `
+            <ion-icon
+                name="${i <= rate ? "star" : "star-outline"}">
+            </ion-icon>
+        `;
+
+    }
+
+    return stars;
+
+}
+
+const reviewsGrid = document.querySelector(".reviews-grid");
+
+function renderReviews(){
+
+    reviewsGrid.innerHTML = "";
+
+    reviews.forEach(review => {
+
+        const card = document.createElement("article");
+
+        card.className = "review-card";
+
+        card.innerHTML = `
+
+            <div class="review-rating">
+
+                ${generateStars(review.rate)}
+
+            </div>
+
+            <p class="review-text">
+                ${review.text}
+            </p>
+
+            <div class="review-user">
+
+                <div class="review-user-info">
+
+                    <h3>${review.name}</h3>
+
+                    <span>${review.tour}</span>
+
+                </div>
+
+            </div>
+
+        `;
+
+        reviewsGrid.appendChild(card);
+
+    });
+
+}
+
+renderReviews();
