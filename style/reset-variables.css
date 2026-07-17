@@ -50,6 +50,9 @@
   --fs-6: 1.6rem;
   --fs-7: 1.5rem;
   --fs-8: 1.1rem;
+  /* badge */
+  --fs-9: 1.3rem;  
+  --fs-10: 1.4rem;  
 
 
   /* font weight */
@@ -102,6 +105,14 @@
   --space-9: 64px;
   --space-10: 80px;
   --space-11: 96px;
+  --tc-space-card: clamp(14px, 3vw, 16px);
+
+
+
+
+
+
+  --tc-transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 
 }
 

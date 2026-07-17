@@ -345,36 +345,80 @@ function renderTours(tours) {
         <div class="tour-card-image">
           <img src="${tour.cover}" alt="${tour.country}">
           <span class="tour-card-badge"> ${tour.badge}</span>
+          <span class="tour-card-location">
+            <ion-icon name="location-sharp"></ion-icon>
+            ${tour.country}، ${tour.city}
+          </span>
         </div>
-
         <div class="tour-card-content">
           <div class="tour-card-header">
-            <h3 class="tour-card-header-title">${titleGenerator(tour.country, tour.city)}</h3>
+            <div class="tour-card-header-title-wrap">
+              <h3 class="tour-card-header-title">${titleGenerator(tour.country, tour.city)}</h3>
+            </div>
+
             <div class="tour-card-header-start">
-              ${dateGenerator(tour.startDate)}
+              <ion-icon class="icon" name="calendar-outline"></ion-icon>
+              <span class="label">تاریخ شروع:</span>
+              <span class="day">${dateGenerator(tour.startDate)}</span>
+              
             </div>
           </div>
+
+          <div class="tour-card-meta">
+            <div class="tour-pill">
+              <ion-icon name="earth-outline"></ion-icon>
+              ${durationGenerator(tour.duration)}
+            </div>
+            <div class="tour-pill">
+              <ion-icon name="car-outline"></ion-icon>
+              حمل و نقل
+            </div>
+            <div class="tour-pill">
+              <ion-icon name="business-outline"></ion-icon>
+              اقامت
+            </div>
+          </div>
+
+          <div class="tour-card-footer">
+            <div class="tour-card-footer-top">
+              <ul class="tour-card-checklist">
+                <li class="tour-card-checklist-item"><ion-icon name="checkmark-circle"></ion-icon>شامل حمل و نقل</li>
+                <li class="tour-card-checklist-item"><ion-icon name="checkmark-circle"></ion-icon>اقامت در هتل‌های منتخب</li>
+                <li class="tour-card-checklist-item"><ion-icon name="checkmark-circle"></ion-icon>بیمه مسافرتی</li>
+                <li class="tour-card-checklist-item"><ion-icon name="checkmark-circle"></ion-icon>راهنمای فارسی زبان</li>
+              </ul>
+            </div>
+
+            <div class="tour-card-footer-top">
+              <div class="tour-card-price-wrapper">
+                  <span class="tour-card-price-label">قیمت هر نفر</span>
+                  <div class="tour-card-price">
+                    <span>${new Intl.NumberFormat('fa-IR').format(tour.price)}</span>
+                    <span>تومان</span>
+                  </div>
+              </div>
+              <button class="tour-btn">
+                مشاهده جزئیات
+              </button>
+            </div>
+            
+            
+          </div>
+          
+        </div>
+      </div>
+
         
 
-        <div class="tour-card-meta">
-          <div class="tour-duration"> 
-            <img class="icon" src="../assets/icon/duration.svg" height="38" alt="logo">
-            ${durationGenerator(tour.duration)} 
-          </div>
-        </div>
+
+
+
+
+
+
+
+
         
-    
-        <div class="tour-card-price"> 
-          <span>${new Intl.NumberFormat('fa-IR').format(tour.price)}</span> تومان
-        </div>
-
-          <div class="tour-card-attention">
-            <ion-icon name="alert-circle-outline"></ion-icon>
-            شامل حمل و نقل، اقامت و خدمات تور
-          </div>
-      </div>
-      </div>
-
     </a>
 
     `;
