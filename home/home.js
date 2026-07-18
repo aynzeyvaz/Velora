@@ -144,7 +144,7 @@ monthInput.addEventListener("click", () => {
 
 monthButtons.forEach( (button) => {
   button.addEventListener("click", () => {
-    monthInput.value = button.dataset.month;
+    monthInput.value = button.textContent.trim();
     monthInput.dataset.label = button.textContent;
     monthModal.classList.remove("active");
   });
