@@ -367,12 +367,13 @@ function renderDestinations(){
 
   card.innerHTML=`
 
+  <a href="#" class="destination-link">
   <img src="${destination.image}"
   alt="${destination.name}">
 
 
   <div class="destination-overlay">
-
+    <div class="destination-info">
       <h3>
       ${destination.name}
       </h3>
@@ -381,10 +382,15 @@ function renderDestinations(){
       <span>
       ${destination.tours}
       </span>
+    
+    
+    
+    </div>
+      
 
 
   </div>
-
+</a>
   `;
 
 
