@@ -23,7 +23,7 @@
 
   /* text color */
   --text-white: hsl(0, 0%, 100%);
-  --text-gunmetal: #333;
+  --text-gunmetal: rgb(15, 23, 42);
   --text-footer: #cbd5e1;
   /* --text-gunmetal: hsl(209, 40%, 14%); */
   --text-price: #e21388;

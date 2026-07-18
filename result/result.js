@@ -24,6 +24,36 @@ const addEventOnElements = function(elements, eventType, callback) {
   }
 }
 
+
+
+// scroll
+
+const sections = document.querySelectorAll(".reveal");
+
+const observer = new IntersectionObserver((entries) => {
+
+    entries.forEach(entry => {
+
+        if(entry.isIntersecting){
+
+            entry.target.classList.add("show");
+
+            observer.unobserve(entry.target);
+
+        }
+
+    });
+
+},{
+    threshold:0.15
+});
+
+sections.forEach(section=>{
+
+    observer.observe(section);
+
+});
+
 /**
  * Navbar toggler for mobile
  */
@@ -114,6 +144,34 @@ function startHeroSlider(images) {
     changeHero(images);
   }, 8000);
 }
+
+
+// month modal
+const monthInput = document.getElementById("month-input");
+const monthModal = document.getElementById("month-modal");
+const monthButtons = document.querySelectorAll(".month-button");
+
+monthInput.addEventListener("click", () => {
+  monthModal.classList.add("active");
+});
+
+monthButtons.forEach( (button) => {
+  button.addEventListener("click", () => {
+    monthInput.value = button.dataset.month;
+    monthInput.dataset.label = button.textContent;
+    monthModal.classList.remove("active");
+  });
+  
+  
+});
+
+document.addEventListener("click", (e) => {
+  if (!e.target.closest(".hero-field")) {
+    monthModal.classList.remove("active");
+  }
+});
+
+
 
 // change hero
 function changeHero(images) {

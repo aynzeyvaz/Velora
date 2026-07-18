@@ -80,24 +80,58 @@
         <div class="hero-bg hero-bg-2"></div>
 
         <div class="hero-overlay"></div>
+        <div class="hero-search">
 
-        <div class="hero-content">
-          <h1 class="hero-title" id="hero-title"></h1>
-        </div>
+            <form class="hero-search-box" id="search-form">
+
+              <div class="hero-field">
+                <label for="origin-input"> مبدا</label>
+                <input id="origin-input" name="origin" type="text" placeholder="مبدا">
+              </div>
+
+              <div class="hero-field">
+                <label for="destination-input"> مقصد</label>
+                <input id="destination-input" name="destination" type="text" placeholder="کجا می‌خوای بری؟">
+              </div>
+              
+              <div class="hero-field month-field">
+                <label for="month-input"> تاریخ</label>
+                <input id="month-input" name="month" readonly>
+
+                <div id="month-modal" class="month-modal">
+                <button type="button" class="month-button" data-month="01"> فروردین</button>
+                <button type="button" class="month-button" data-month="02"> اردیبهشت</button>
+                <button type="button" class="month-button" data-month="03"> خرداد</button>
+                <button type="button" class="month-button" data-month="04"> تیر</button>
+                <button type="button" class="month-button" data-month="05"> مرداد</button>
+                <button type="button" class="month-button" data-month="06"> شهریور</button>
+                <button type="button" class="month-button" data-month="07"> مهر</button>
+                <button type="button" class="month-button" data-month="08"> آبان</button>
+                <button type="button" class="month-button" data-month="09"> آذر</button>
+                <button type="button" class="month-button" data-month="10"> دی</button>
+                <button type="button" class="month-button" data-month="11"> بهمن</button>
+                <button type="button" class="month-button" data-month="12"> اسفند</button>
+              </div>
+
+                
+              </div>
+              
+              <button type="submit" class="search-btn btn"> جستجو</button>
+
+              
+
+          
+            </form>
+           </div>
 
       </div>
-        
-
-
-
+    
     </section>
 
 
-           
-    
-           
 
-  
+
+    <!-- results -->
       <section class="result-tours">
 
         <div class="container">
