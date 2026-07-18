@@ -147,13 +147,13 @@ section {
 /* Hero Section */
 
  .hero {
-  /* position: relative; */
+  position: relative;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  overflow: hidden;
+  overflow: visible;
   padding-block-start : var(--space-6);
   padding-block-end : var(--space-6);
 
@@ -162,7 +162,7 @@ section {
   .hero .container {
     position: relative;
     height: 280px;
-    overflow:hidden;
+    overflow:visible;
     border-radius:var(--radius-20);
   
   }
@@ -201,6 +201,133 @@ section {
   z-index: 2;
   color: white;
   }
+
+
+
+
+ /* Hero Search */
+.hero-search { 
+   position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+
+  width: 100%;
+  z-index: 3;
+
+  display:flex;
+  justify-content:center;
+
+  padding-inline: 16px;
+    }
+
+.hero-search-box {
+  background: var(--bg-lavender-blush);
+ display:flex;
+ flex-direction:column;
+ gap:15px;
+
+ padding:20px;
+ border-radius:20px;
+
+ width:100%;
+ max-width:900px;
+
+ box-shadow:var(--shadow-1);
+
+ transform:translateY(40%);
+
+    }
+
+.hero-field {
+   position:relative;
+
+ flex:1;
+ display:flex;
+ flex-direction:column;
+    }
+
+.hero-field label {
+
+  font-size: var(--fs-7);
+  margin-bottom: 6px;
+  color: var(--text-gunmetal);
+
+
+    }
+
+.hero-field input {
+  color: rgb(0, 0, 0);
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  outline: none;
+}
+
+.search-btn {
+  padding: 12px 25px;
+  border: none;
+  border-radius: 12px;
+  background: var(--bg-majorelle-blue);
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+
+.month-modal {
+  position: absolute;
+  bottom: 60px;
+  left: 0;
+  right: 0;
+
+  backdrop-filter: blur(10px);
+  background:transparent;
+  border-radius: 16px;
+  padding: 15px;
+
+  box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+
+  opacity: 0;
+  transform: translateY(10px);
+  transition: 0.3s ease;
+
+  pointer-events: none;
+  }
+
+  .month-modal.active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+ .month-button {
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background: var(--bg-lavender-blush);
+    color: var(--text-gunmetal);
+    transition: all 0.2s ease;
+    box-shadow: var(--shadow-1);
+}
+
+
+
+.month-button:hover {
+  background: var(--bg-majorelle-blue);
+  color: white;
+  transform: translateY(-2px);
+}
+
+
+
+
+
 
   
 
@@ -704,6 +831,16 @@ color: var(--text-majorelle-blue) }
   .container {
     max-width: 640px; 
   }
+  .hero-search-box{
+ flex-direction:row;
+ align-items:end;
+ transform:translateY(50%);
+}
+
+
+.search-btn{
+ width:120px;
+}
 
   .filter-item {
     font-size: var(--fs-7);
