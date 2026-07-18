@@ -276,61 +276,73 @@ section {
 }
 
 
+/* month modal */
+
+
 .month-modal {
-  position: absolute;
-  bottom: 60px;
-  left: 0;
-  right: 0;
 
-  backdrop-filter: blur(10px);
-  background:transparent;
-  border-radius: 16px;
-  padding: 15px;
+  position:absolute;
+  bottom: calc(100% + 8px);
+  left:0;
+  width:240px;
+  padding:var(--space-3);
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:var(--space-2);
+  background:var(--bg-lavender-blush);
+  backdrop-filter:blur(12px);
+  border-radius:var(--radius-20);
+  box-shadow: var(--shadow-1);
 
-  box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+  border:1px solid rgba(0,0,0,.05);
+  opacity:0;
+  visibility:hidden;
+  transform:
+  translateY(10px)
+  scale(.95);
+  transition:.25s ease;
+  pointer-events:none;
+  z-index:20;
 
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
+}
 
-  opacity: 0;
-  transform: translateY(10px);
-  transition: 0.3s ease;
 
-  pointer-events: none;
-  }
 
-  .month-modal.active {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-  }
+.month-modal.active {
+  opacity:1;
+  visibility:visible;
+  transform:
+  translateY(0)
+  scale(1);
+  pointer-events:auto;
+}
 
- .month-button {
-    padding: 10px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    background: var(--bg-lavender-blush);
-    color: var(--text-gunmetal);
-    transition: all 0.2s ease;
-    box-shadow: var(--shadow-1);
+
+.month-button {
+  height:36px;
+  padding:0;
+  border:none;
+  border-radius:var(--radius-10);
+  background:var(--bg-white);
+  color:var(--text-gunmetal);
+  font-size:var(--fs-7);
+
+  transition:.2s ease;
+
 }
 
 
 
 .month-button:hover {
-  background: var(--bg-majorelle-blue);
-  color: white;
-  transform: translateY(-2px);
+  background:var(--bg-majorelle-blue);
+  color:var(--text-white);
+  transform:translateY(-2px);
 }
 
+.month-button:active {
+  transform:scale(.95);
+}
 
-
-
-
-
-  
 
 
 /* result Tours */
@@ -844,17 +856,30 @@ color: var(--text-majorelle-blue) }
 }
 
 
+
 .hero-field label{
-    display:block;
-     height:var(--space-5);
+  display:block;
+    height:var(--space-5);
 }
 
 
 .search-btn{
-
     width:120px;
     height:45px;
 
+}
+.month-modal {
+
+  width:280px;
+  padding:14px;
+  gap:var(--space-3);
+
+}
+
+
+.month-button {
+  height:40px;
+  font-size:var(--fs-8);
 }
 
 
@@ -892,25 +917,25 @@ color: var(--text-majorelle-blue) }
   .hero .container{
     height:min(600px, 65vh);
   }
-.hero-search{
-    padding-inline:0;
-}
+  .hero-search{
+      padding-inline:0;
+  }
 
 
-.hero-search-box{
-  max-width:920px;
-  padding:var(--space-4);
-  gap:var(--space-5);
-  transform:translateY(50%);
-}
+  .hero-search-box{
+    max-width:920px;
+    padding:var(--space-4);
+    gap:var(--space-5);
+    transform:translateY(50%);
+  }
 
 
 
-.hero-field input{
+  .hero-field input{
 
-    height:48px;
+      height:48px;
 
-}
+  }
 
 
 
@@ -928,6 +953,19 @@ color: var(--text-majorelle-blue) }
     display:block;
     
   }
+
+  .month-modal{
+    width:320px;
+
+}
+
+
+.month-button{
+  height:44px;
+
+  font-size:var(--fs-7);
+
+}
 
 
 
