@@ -283,8 +283,94 @@ async function renderTours() {
 
   });
 
+  if (toursGrid._refreshSlider) {
+    toursGrid._refreshSlider();
+  }
+
 }
 
+// slider
+
+const isRTL = document.documentElement.dir === "rtl";
+
+function initSlider(track) {
+  const section = track.closest("section");
+  const arrowsBox = section?.querySelector("[data-slider-arrows]");
+  if (!arrowsBox) return;
+
+  const prevBtn = arrowsBox.querySelector(".slider-arrow--prev");
+  const nextBtn = arrowsBox.querySelector(".slider-arrow--next");
+
+  function getScrollAmount() {
+    const firstCard = track.firstElementChild;
+    if (!firstCard) return 300;
+    const cardWidth = firstCard.getBoundingClientRect().width;
+    const gap = parseFloat(getComputedStyle(track).columnGap) || 18;
+    return cardWidth + gap;
+  }
+
+  function updateArrowState() {
+    const maxScroll = track.scrollWidth - track.clientWidth;
+    const scrollLeft = Math.abs(track.scrollLeft);
+
+    if (maxScroll <= 1) {
+      prevBtn.disabled = true;
+      nextBtn.disabled = true;
+      return;
+    }
+
+    prevBtn.disabled = scrollLeft <= 0;
+    nextBtn.disabled = scrollLeft >= maxScroll - 1;
+  }
+
+ 
+  function scrollByCards(direction) {
+    const amount = getScrollAmount();
+    const rtlSign = isRTL ? -1 : 1;
+    track.scrollBy({ left: direction * amount * rtlSign, behavior: "smooth" });
+  }
+
+  nextBtn.addEventListener("click", () => scrollByCards(1));
+  prevBtn.addEventListener("click", () => scrollByCards(-1));
+  track.addEventListener("scroll", updateArrowState);
+
+  updateArrowState();
+  track._refreshSlider = updateArrowState;
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".tours-grid, .destinations-grid").forEach(initSlider);
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// search api
 const searchForm = document.getElementById("search-form");
 
 searchForm.addEventListener("submit", function(event) {
@@ -321,6 +407,16 @@ renderTours();
 
 const destinations = [
 
+{
+    name:"کیش",
+    tours:"۲۵ تور",
+    image:"../assets/images/category1.jpg"
+},
+{
+    name:"کیش",
+    tours:"۲۵ تور",
+    image:"../assets/images/category1.jpg"
+},
 {
     name:"کیش",
     tours:"۲۵ تور",
@@ -398,6 +494,9 @@ function renderDestinations(){
 
 
   });
+  if (destinationsGrid._refreshSlider) {
+    destinationsGrid._refreshSlider();
+  }
 
 
 }

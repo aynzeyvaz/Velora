@@ -42,8 +42,9 @@
   color:var(--text-gunmetal);
   margin-bottom: var(--space-6);
   display: flex;
+  flex-direction: row;
   align-items: center;
-  justify-content: start;
+  justify-content: space-between;
   text-align: justify;
 }
 
@@ -381,6 +382,54 @@
   margin-top: 60px;
 
 }
+.section-header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.section-header-top .section-title {
+  margin-bottom: 0;
+}
+
+.slider-arrows {
+  display: flex;
+  gap: var(--space-2);
+  flex-shrink: 0;
+  padding-left: var(--space-4);
+}
+
+.slider-arrow {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(26, 83, 189, 0.15);
+  background: var(--bg-white);
+  color: var(--text-majorelle-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--fs-6);
+  transition: var(--transition-1);
+}
+
+.slider-arrow:hover {
+  background: var(--bg-majorelle-blue);
+  color: var(--text-white);
+}
+
+.slider-arrow:active {
+  transform: scale(0.92);
+}
+
+.slider-arrow:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  background: var(--bg-white);
+  color: var(--text-majorelle-blue);
+}
 
 
 
@@ -390,13 +439,23 @@
 
 
 .tours-grid {
-
   margin-top: 40px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 18px;
-  justify-content: center;
+  display: flex;
+  gap: var(--space-4);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding-bottom: var(--space-2);
+  scrollbar-width: none;  /* firefox*/
+
 }
+
+.tours-grid::-webkit-scrollbar {
+  display: none;   /* chrome and safari*/
+}
+
+
+
 /* tour card */
 .tour-card {
   background: var(--bg-lavender-blush);
@@ -409,6 +468,9 @@
   border: 1px solid rgb(227, 227, 227);
   /* padding: 5px; */
   gap: 8px;
+
+   flex: 0 0 78%;
+  scroll-snap-align: start;
 }
 
 
@@ -474,7 +536,7 @@
 .tour-card-content {
   padding: 10px;
   color: var(--text-gunmetal);
-  background: linear-gradient(to top, #fff, #fafafa);
+  background: linear-gradient(to top, #fff, #fafafab7);
     /* border-bottom-left-radius: 2px;
   border-bottom-right-radius: 2px; */
   
@@ -554,23 +616,28 @@
 
 
 .destinations-grid {
-  display:grid;
-  grid-template-columns:
-  repeat(2,1fr);
-  gap:var(--space-4);
-  margin-top:var(--space-6);
-
+  display: flex;
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding-bottom: 8px;
+  scrollbar-width: none; /* firefox */
 }
 
-
-
+.destinations-grid::-webkit-scrollbar {
+  display: none; /* chrome / safari */
+}
 
 .destination-card {
-  position:relative;
-  overflow:hidden;
-  aspect-ratio: 3 / 4;
-  border-radius:var(--radius-20);
-  box-shadow:var(--shadow-1);
+  position: relative;
+  overflow: hidden;
+  flex: 0 0 78%;
+  aspect-ratio: 4/5;
+  border-radius: var(--radius-20);
+  box-shadow: var(--shadow-1);
+  scroll-snap-align: start;
 }
 
 
@@ -1040,6 +1107,12 @@ margin-top:60px;
     width: 100%;
     margin-inline: auto;
   }
+   .tour-card {
+    flex: 0 0 340px;
+  }
+  .destination-card {
+    flex: 0 0 340px;
+  }
 
 
 }
@@ -1143,11 +1216,11 @@ margin-top:60px;
     max-width: 950px;
   }
 
-    .month-modal{
+  .month-modal{
     width:320px;
 
 }
-.hero-search{
+  .hero-search{
       padding-inline:0;
   }
 
@@ -1163,7 +1236,7 @@ margin-top:60px;
 
   .hero-field input{
 
-      height:48px;
+    height:48px;
 
   }
 
@@ -1171,11 +1244,11 @@ margin-top:60px;
 
 .search-btn{
 
-    height:48px;
-    width:130px;
-    font-size: var(--fs-6);
+  height:48px;
+  width:130px;
+  font-size: var(--fs-6);
 
-    border-radius:var(--radius-pill);
+  border-radius:var(--radius-pill);
 
 }
 
@@ -1191,21 +1264,15 @@ margin-top:60px;
   font-size:var(--fs-7);
 
 }
+.tour-card {
+    flex: 0 0 calc(25% - 14px);
+  }
 
-.destinations-grid {
-
- grid-template-columns:
- repeat(4,1fr);
-
-}
 
 
 .destination-card {
-
- aspect-ratio:7 / 8;
-
-}
-  
+  flex: 0 0 calc(25% - 14px);
+  aspect-ratio: 7 / 8;
 }
 
 @media (min-width: 1200px) {
