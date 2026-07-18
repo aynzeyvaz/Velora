@@ -142,14 +142,15 @@ monthInput.addEventListener("click", () => {
   monthModal.classList.add("active");
 });
 
-monthButtons.forEach( (button) => {
+monthButtons.forEach((button) => {
   button.addEventListener("click", () => {
+
     monthInput.value = button.textContent.trim();
-    monthInput.dataset.label = button.textContent;
+
+    monthInput.dataset.month = button.dataset.month;
+
     monthModal.classList.remove("active");
   });
-  
-  
 });
 
 document.addEventListener("click", (e) => {
@@ -291,7 +292,7 @@ searchForm.addEventListener("submit", function(event) {
 
   const origin =document.getElementById("origin-input").value;
   const destination =document.getElementById("destination-input").value;
-  const month =document.getElementById("month-input").value;
+  const month = document.getElementById("month-input").dataset.month;
 
 
   const params= new URLSearchParams({

@@ -129,14 +129,15 @@ monthInput.addEventListener("click", () => {
   monthModal.classList.add("active");
 });
 
-monthButtons.forEach( (button) => {
+monthButtons.forEach((button) => {
   button.addEventListener("click", () => {
+
     monthInput.value = button.textContent.trim();
-    monthInput.dataset.label = button.textContent;
+
+    monthInput.dataset.month = button.dataset.month;
+
     monthModal.classList.remove("active");
   });
-  
-  
 });
 
 document.addEventListener("click", (e) => {
@@ -466,6 +467,31 @@ function renderTours(tours) {
   
 
 }
+
+
+const searchForm = document.getElementById("search-form");
+
+searchForm.addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  const origin =document.getElementById("origin-input").value;
+  const destination =document.getElementById("destination-input").value;
+  const month = document.getElementById("month-input").dataset.month;
+
+
+  const params= new URLSearchParams({
+    origin: origin,
+    destination: destination,
+    month: month
+  });
+
+  window.location.href=`../result/result.html?${params.toString()}`;
+
+
+
+
+
+});
 
 
 fetchSearchTours();
