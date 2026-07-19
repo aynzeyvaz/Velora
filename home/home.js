@@ -88,11 +88,19 @@ submenuItems.forEach((item) => {
   const submenu = item.querySelector("[data-submenu]");
 
   category.options.forEach((option) => {
+
     const li = document.createElement("li");
     li.classList.add("submenu-item");
-    li.innerHTML = `<a href="#" class="submenu-link">${option}</a>`;
+
+    li.innerHTML = `
+    <a href="../result/result.html?destination=${option}" 
+    class="submenu-link">
+    ${option}
+    </a>`;
+
     submenu.appendChild(li);
-  });
+
+});
 });
 
 // آکاردئون برای موبایل
@@ -440,16 +448,16 @@ const searchForm = document.getElementById("search-form");
 searchForm.addEventListener("submit", function(event) {
   event.preventDefault();
 
-  const origin =document.getElementById("origin-input").value;
-  const destination =document.getElementById("destination-input").value;
-  const month = document.getElementById("month-input").dataset.month;
+  const origin =document.getElementById("origin-input").value.trim();
+  const destination =document.getElementById("destination-input").value.trim();
+  const month = document.getElementById("month-input").dataset.month || "";
 
 
-  const params= new URLSearchParams({
-    origin: origin,
-    destination: destination,
-    month: month
-  });
+  const params = new URLSearchParams();
+
+  if (origin) params.append("origin", origin);
+  if (destination) params.append("destination", destination);
+  if (month) params.append("month", month);
 
   window.location.href=`../result/result.html?${params.toString()}`;
 

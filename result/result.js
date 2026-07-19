@@ -367,6 +367,7 @@ const results_Api= "https://velora-1-cbh9.onrender.com/api/search/result/";
 // const month=urlParams.get("month");
 
 async function fetchSearchTours(sort=""){
+  
 
   toursGrid.classList.add("loading");
   apiLoader.classList.add("active");
@@ -541,11 +542,20 @@ searchForm.addEventListener("submit", function(event) {
   const month = document.getElementById("month-input").dataset.month;
 
 
-  const params= new URLSearchParams({
-    origin: origin,
-    destination: destination,
-    month: month
-  });
+  const params = new URLSearchParams();
+
+
+if(origin){
+    params.append("origin", origin);
+}
+
+if(destination){
+    params.append("destination", destination);
+}
+
+if(month){
+    params.append("month", month);
+}
 
   window.location.href=`../result/result.html?${params.toString()}`;
 
@@ -555,5 +565,5 @@ searchForm.addEventListener("submit", function(event) {
 
 });
 
-
+console.log(apiUrl);
 fetchSearchTours();
