@@ -417,11 +417,6 @@ const destinations = [
     tours:"۲۵ تور",
     image:"../assets/images/category1.jpg"
 },
-{
-    name:"کیش",
-    tours:"۲۵ تور",
-    image:"../assets/images/category1.jpg"
-},
 
 {
     name:"استانبول",
@@ -512,7 +507,7 @@ const categories = [
 {
     id:1,
     title:"تورهای خارجی",
-    image:"../assets/images/category1.jpg",
+    image:"../assets/images/category/category1.jpg",
     options:[
         "ترکیه",
         "امارات",
@@ -533,7 +528,7 @@ const categories = [
 {
     id:2,
     title:"تورهای داخلی",
-    image:"../assets/images/category2.jpg",
+    image:"../assets/images/category/category2.jpg",
     options:[
         "کیش",
         "قشم",
@@ -547,7 +542,7 @@ const categories = [
 {
     id:3,
     title:"تورهای یک روزه",
-    image:"../assets/images/category3.jpg",
+    image:"../assets/images/category/category3.jpg",
     options:[
         "ماسال",
         "قلعه بابک",
@@ -560,7 +555,7 @@ const categories = [
 {
     id:4,
     title:"تورهای ناشناس",
-    image:"../assets/images/category4.jpg",
+    image:"../assets/images/category/category4.jpg",
     options:[
         "روستاهای بکر",
         "جزایر ناشناخته",

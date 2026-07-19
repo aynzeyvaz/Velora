@@ -67,15 +67,16 @@ window.addEventListener("scroll", () => {
 
 
 
-const bg1 = document.querySelector(".hero-bg-1");
-const bg2 = document.querySelector(".hero-bg-2");
+const fallbackBg = document.querySelector(".hero-bg-fallback");
+const apiBgs = document.querySelectorAll(".hero-bg-api");
+let activeApiLayer = null;
+let nextLayerIndex = 0;
 
-// const heroSubtitle = document.querySelector(".hero-subtitle");
 
 
 let count = 0;
-let activeBg = bg1;
-let inactiveBg= bg2;
+let firstHeroLoad = true;
+
 
 // hero background API
 
@@ -98,13 +99,13 @@ async function fetchHeroImages() {
       throw new Error("failed");
     }
 
-
     const data = await response.json();
     destinationName = data.destination;
-
     updateResultTitle(destinationName);
+
     startHeroSlider(data.heroImages);
   }
+
   catch(err) {
     console.log(err);
   }
@@ -113,7 +114,7 @@ async function fetchHeroImages() {
 //start hero slider 
 
 function startHeroSlider(images) {
-   changeHero(images);
+  changeHero(images);
   setInterval(() => {
     changeHero(images);
   }, 8000);
@@ -151,34 +152,25 @@ document.addEventListener("click", (e) => {
 // change hero
 function changeHero(images) {
 
-  const currentBg = images[count];
-  count = (count +1) % images.length;
-  
+  const currentImage = images[count];
+  count = (count + 1) % images.length;
 
-  [activeBg, inactiveBg] = [inactiveBg, activeBg]
+  const incomingLayer = apiBgs[nextLayerIndex];
+  nextLayerIndex = (nextLayerIndex + 1) % apiBgs.length;
 
-  inactiveBg.style.backgroundImage =`url(${currentBg})`;
+  incomingLayer.style.backgroundImage = `url(${currentImage})`;
 
-  inactiveBg.classList.add("active");
-  inactiveBg.classList.remove("inactive");
+  requestAnimationFrame(() => {
+    incomingLayer.classList.add("active");
 
-  activeBg.classList.add("inactive");
-  activeBg.classList.remove("active");
+    if (activeApiLayer) {
+      activeApiLayer.classList.remove("active");
+    }
+    fallbackBg.classList.remove("active");
 
-  // heroTitle.classList.add("hide");
-  // heroSubtitle.classList.add("hide");
+    activeApiLayer = incomingLayer;
+  });
 
-  setTimeout(() => {
-    
-
-  // heroSubtitle.textContent = currentBg.subTitle;
-
-  // heroTitle.classList.remove("hide");
-  // heroSubtitle.classList.remove("hide");
-
-  }, 600);
-
-  
 }
 
 fetchHeroImages();

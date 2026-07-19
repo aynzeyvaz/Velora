@@ -172,10 +172,14 @@ section {
   inset: 0;
   background-size: cover;
   background-position: center; 
-  transition: opacity 1200ms ease, transform 2500ms ease;
+  transition: opacity 3500ms ease;
   border-radius: var(--radius-20);
-  /* transform: scale(1.08); */
+  opacity: 0;
  }
+
+ .hero-bg-fallback {
+  background-image: url('../assets/images/fallback/hero-fallback.jpg');
+}
 
 .hero-bg.active {
   opacity: 1;
