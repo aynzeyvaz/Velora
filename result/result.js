@@ -354,6 +354,13 @@ async function fetchSearchTours(sort=""){
   }
   catch (err) {
     console.error(err);
+    toursGrid.innerHTML = `
+        <p class="no-results">
+         خطای سرور
+        </p>
+      `;
+
+      return;
     
   }
   finally {
