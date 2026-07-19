@@ -92,8 +92,8 @@ submenuItems.forEach((item) => {
   li.classList.add("submenu-item");
 
   li.innerHTML = `
-    <a href="result.html?destination=${encodeURIComponent(option)}"
-       class="submenu-link">
+    <a href="../result/result.html?destination=${encodeURIComponent(option)}"
+      class="submenu-link">
       ${option}
     </a>`;
 

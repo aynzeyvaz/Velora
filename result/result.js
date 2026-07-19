@@ -99,15 +99,15 @@ submenuItems.forEach((item) => {
     const li = document.createElement("li");
     li.classList.add("submenu-item");
 
-    li.innerHTML = `
-      <a href="result.html?destination=${encodeURIComponent(option)}"
+   li.innerHTML = `
+      <a href="../result/result.html?destination=${encodeURIComponent(option)}"
         class="submenu-link">
         ${option}
       </a>`;
 
     submenu.appendChild(li);
   });
-  
+
 });
 
 // آکاردئون برای موبایل
