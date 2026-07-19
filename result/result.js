@@ -98,9 +98,16 @@ submenuItems.forEach((item) => {
   category.options.forEach((option) => {
     const li = document.createElement("li");
     li.classList.add("submenu-item");
-    li.innerHTML = `<a href="#" class="submenu-link">${option}</a>`;
+
+    li.innerHTML = `
+      <a href="result.html?destination=${encodeURIComponent(option)}"
+        class="submenu-link">
+        ${option}
+      </a>`;
+
     submenu.appendChild(li);
   });
+  
 });
 
 // آکاردئون برای موبایل
@@ -371,13 +378,12 @@ async function fetchSearchTours(sort=""){
 
   toursGrid.classList.add("loading");
   apiLoader.classList.add("active");
-  const params = new URLSearchParams({
-    origin, destination, month
-  });
 
-  if(sort){
-    params.append("sort", sort);
-  }
+  const params = new URLSearchParams();
+    if (origin) params.append("origin", origin);
+    if (destination) params.append("destination", destination);
+    if (month) params.append("month", month);
+    if (sort) params.append("sort", sort);
 
   let apiUrl =
   `${results_Api}?${params.toString()}`;
@@ -565,5 +571,4 @@ if(month){
 
 });
 
-console.log(apiUrl);
 fetchSearchTours();
