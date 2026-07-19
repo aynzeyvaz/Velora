@@ -55,6 +55,70 @@ window.addEventListener("scroll", () => {
 );
 
 
+// Navbar Submenu (categories)
+
+const navbarCategories = [
+  {
+    title: "تورهای خارجی",
+    options: ["ترکیه","امارات","گرجستان","ارمنستان","تایلند","فرانسه","ایتالیا","سوئد","سوئیس","آلمان","اسپانیا","اندونزی","مالزی"]
+  },
+  {
+    title: "تورهای داخلی",
+    options: ["کیش","قشم","مشهد","شیراز","اصفهان","چابهار"]
+  },
+  {
+    title: "تورهای یک روزه",
+    options: ["ماسال","قلعه بابک","کندوان","آبشار لاتون","کویر مرنجاب"]
+  },
+  {
+    title: "تورهای ناشناس",
+    options: ["روستاهای بکر","جزایر ناشناخته","جنگل‌های شمال","کوهستان","دریاچه‌های مخفی"]
+  }
+];
+
+const submenuItems = document.querySelectorAll("[data-has-submenu]");
+
+// پر کردن هر زیرمنو با گزینه‌های مربوطه
+submenuItems.forEach((item) => {
+  const linkText = item.querySelector(".navbar-link").textContent.replace("تور", "").trim();
+  const category = navbarCategories.find((cat) => cat.title.includes(linkText));
+
+  if (!category) return;
+
+  const submenu = item.querySelector("[data-submenu]");
+
+  category.options.forEach((option) => {
+    const li = document.createElement("li");
+    li.classList.add("submenu-item");
+    li.innerHTML = `<a href="#" class="submenu-link">${option}</a>`;
+    submenu.appendChild(li);
+  });
+});
+
+// آکاردئون برای موبایل
+const submenuToggles = document.querySelectorAll(".submenu-toggle");
+
+submenuToggles.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const isDesktop = window.matchMedia("(min-width: 992px)").matches;
+    if (isDesktop) return;
+
+    const parentItem = btn.closest("[data-has-submenu]");
+    const isActive = parentItem.classList.contains("active");
+
+    submenuItems.forEach((item) => {
+      item.classList.remove("active");
+      item.querySelector(".submenu-toggle").setAttribute("aria-expanded", "false");
+    });
+
+    if (!isActive) {
+      parentItem.classList.add("active");
+      btn.setAttribute("aria-expanded", "true");
+    }
+  });
+});
+
+
 // Hero Section 
 
 const heroBgs = [ 
@@ -410,30 +474,30 @@ const destinations = [
 {
     name:"کیش",
     tours:"۲۵ تور",
-    image:"../assets/images/category1.jpg"
+    image:"../assets/images/category/category1.jpg"
 },
 {
     name:"کیش",
     tours:"۲۵ تور",
-    image:"../assets/images/category1.jpg"
+    image:"../assets/images/category/category2.jpg"
 },
 
 {
     name:"استانبول",
     tours:"۱۸ تور",
-    image:"../assets/images/category2.jpg"
+    image:"../assets/images/category/category3.jpg"
 },
 
 {
     name:"دبی",
     tours:"۱۲ تور",
-    image:"../assets/images/category3.jpg"
+    image:"../assets/images/category/category4.jpg"
 },
 
 {
     name:"شیراز",
     tours:"۲۰ تور",
-    image:"../assets/images/category4.jpg"
+    image:"../assets/images/category/category4.jpg"
 }
 
 ];

@@ -112,6 +112,62 @@
 
  .navbar-link:is(:hover, :focus-visible, .active) { transform: translateX(10px); }
 
+ /* Submenu */
+
+.navbar-link-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.submenu-toggle {
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: var(--fs-6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  transition: transform 0.3s ease;
+}
+
+.has-submenu.active .submenu-toggle {
+  transform: rotate(180deg);
+}
+
+.submenu {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.35s ease, opacity 0.3s ease;
+  padding-right: var(--space-4);
+}
+
+.has-submenu.active .submenu {
+  max-height: 500px;
+  opacity: 1;
+  padding-block: var(--space-2);
+}
+
+.submenu-item {
+  padding-block: 6px;
+}
+
+.submenu-link {
+  display: block;
+  color: inherit;
+  font-size: var(--fs-8);
+  opacity: 0.85;
+  transition: var(--transition-1);
+}
+
+.submenu-link:is(:hover, :focus-visible) {
+  opacity: 1;
+  color: var(--bg-majorelle-blue);
+}
+
 
 
  .header-action{  
@@ -195,6 +251,36 @@
     left: 50%;
     transform: translateX(-50%);
   }
+
+  .submenu-toggle { display: none; }
+
+  .has-submenu { position: relative; }
+
+  .submenu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    min-width: 200px;
+    background: var(--bg-white);
+    border-radius: var(--radius-10);
+    box-shadow: var(--shadow-1);
+    padding: var(--space-3);
+    max-height: none;
+    overflow: visible;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+    z-index: 10;
+  }
+
+  .has-submenu:is(:hover, :focus-within) .submenu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .submenu-link { color: var(--text-gunmetal); }
   .header-action, .header-action .loggedout, .header-action .loggedin {
     border: none;
     padding-block-start: 0;

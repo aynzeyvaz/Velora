@@ -63,6 +63,69 @@ window.addEventListener("scroll", () => {
 );
 
 
+// Navbar Submenu (categories)
+
+const navbarCategories = [
+  {
+    title: "تورهای خارجی",
+    options: ["ترکیه","امارات","گرجستان","ارمنستان","تایلند","فرانسه","ایتالیا","سوئد","سوئیس","آلمان","اسپانیا","اندونزی","مالزی"]
+  },
+  {
+    title: "تورهای داخلی",
+    options: ["کیش","قشم","مشهد","شیراز","اصفهان","چابهار"]
+  },
+  {
+    title: "تورهای یک روزه",
+    options: ["ماسال","قلعه بابک","کندوان","آبشار لاتون","کویر مرنجاب"]
+  },
+  {
+    title: "تورهای ناشناس",
+    options: ["روستاهای بکر","جزایر ناشناخته","جنگل‌های شمال","کوهستان","دریاچه‌های مخفی"]
+  }
+];
+
+const submenuItems = document.querySelectorAll("[data-has-submenu]");
+
+// پر کردن هر زیرمنو با گزینه‌های مربوطه
+submenuItems.forEach((item) => {
+  const linkText = item.querySelector(".navbar-link").textContent.replace("تور", "").trim();
+  const category = navbarCategories.find((cat) => cat.title.includes(linkText));
+
+  if (!category) return;
+
+  const submenu = item.querySelector("[data-submenu]");
+
+  category.options.forEach((option) => {
+    const li = document.createElement("li");
+    li.classList.add("submenu-item");
+    li.innerHTML = `<a href="#" class="submenu-link">${option}</a>`;
+    submenu.appendChild(li);
+  });
+});
+
+// آکاردئون برای موبایل
+const submenuToggles = document.querySelectorAll(".submenu-toggle");
+
+submenuToggles.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const isDesktop = window.matchMedia("(min-width: 992px)").matches;
+    if (isDesktop) return;
+
+    const parentItem = btn.closest("[data-has-submenu]");
+    const isActive = parentItem.classList.contains("active");
+
+    submenuItems.forEach((item) => {
+      item.classList.remove("active");
+      item.querySelector(".submenu-toggle").setAttribute("aria-expanded", "false");
+    });
+
+    if (!isActive) {
+      parentItem.classList.add("active");
+      btn.setAttribute("aria-expanded", "true");
+    }
+  });
+});
+
 // Hero Section 
 
 
