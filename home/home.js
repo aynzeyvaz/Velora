@@ -368,7 +368,7 @@ async function renderTours() {
     card.innerHTML= `
     <a href="#"> 
         <div class="tour-card-image">
-        <img src="${tour.cover}" alt="${tour.country}">
+        <img loading="lazy" src="${tour.cover}" alt="${tour.country}">
         <span class="tour-card-badge"> ${tour.badge}</span>
     </div>
 
@@ -651,7 +651,7 @@ function renderCategories(categories){
 
         const card=document.createElement("article");
 
-        card.className="category-card reveal-item";
+        card.classList.add("category-card", "reveal-item");
 
         card.innerHTML=`
 
@@ -759,7 +759,7 @@ function renderReviews(){
 
         const card = document.createElement("article");
 
-        card.className = "review-card reveal-item";
+        card.classList.add("review-card", "reveal-item");
 
         card.innerHTML = `
 
@@ -790,10 +790,72 @@ function renderReviews(){
         reviewsGrid.appendChild(card);
 
     });
-   
-    observeRevealItems();
     
 }
+
+const revealObserver = new IntersectionObserver(
+(entries)=>{
+
+entries.forEach(entry=>{
+
+
+if(entry.isIntersecting){
+
+
+const item = entry.target;
+
+const siblings = [...item.parentElement.children];
+
+const index = siblings.indexOf(item);
+
+
+setTimeout(()=>{
+
+item.classList.add("show");
+
+}, index * 150);
+
+
+
+revealObserver.unobserve(item);
+
+
+}
+
+
+});
+
+
+},
+{
+threshold:0.15
+}
+);
+
+
+function observeRevealItems(){
+
+  const items = document.querySelectorAll(
+    ".reveal-item:not(.observed)"
+  );
+
+
+  items.forEach((item,index)=>{
+
+    item.classList.add("observed");
+
+
+    revealObserver.observe(item);
+
+
+  });
+
+}
+
+
+
+
+
 
 
 async function initPage(){
@@ -810,6 +872,7 @@ async function initPage(){
     ]);
     renderReviews();
 
+    observeRevealItems(); 
 
     hideLoader();
 
@@ -819,7 +882,7 @@ async function initPage(){
   catch(error){
 
     console.log("Page Loading Error:", error);
-
+    observeRevealItems();
     hideLoader();
 
   }
@@ -828,66 +891,3 @@ async function initPage(){
 }
 
 initPage();
-
-function observeRevealItems(){
-
-const items=document.querySelectorAll(
-".reveal-item:not(.observed)"
-);
-
-
-items.forEach(item=>{
-
-
-item.classList.add("observed");
-
-
-revealObserver.observe(item);
-
-
-
-});
-
-
-}
-
-const revealElements = document.querySelectorAll(
-  ".reveal, .reveal-item"
-);
-
-
-const revealObserver = new IntersectionObserver(
-(entries)=>{
-
-entries.forEach(entry=>{
-
-
-if(entry.isIntersecting){
-
-
-entry.target.classList.add("show");
-
-
-revealObserver.unobserve(entry.target);
-
-
-}
-
-
-
-});
-
-
-},
-{
-threshold:0.15
-}
-);
-
-
-
-revealElements.forEach(el=>{
-
-revealObserver.observe(el);
-
-});

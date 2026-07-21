@@ -40,6 +40,7 @@
   transition:
   opacity .7s ease,
   transform .7s cubic-bezier(.22,1,.36,1);
+   transition-delay: var(--delay);
 }
 
 
@@ -47,6 +48,7 @@
   opacity:1;
   transform:translateY(0);
 }
+
 
 
 
@@ -475,21 +477,19 @@
 
 
 .tours-grid {
-  margin-top: 40px;
+  margin-top: var(--space-7);
   display: flex;
   gap: var(--space-4);
   overflow-x: auto;
   overflow-y: hidden;
+  overscroll-behavior-x: contain;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   padding-bottom: var(--space-2);
-  scrollbar-width: none;  /* firefox*/
+  scrollbar-width: thin;
 
 }
 
-.tours-grid::-webkit-scrollbar {
-  display: auto;   /* chrome and safari*/
-}
 
 
 
@@ -505,15 +505,16 @@
   transition:  transform .3s ease, box-shadow .3s ease;
   border: 1px solid rgb(227, 227, 227);
   /* padding: 5px; */
-  gap: 8px;
+  gap: var(--space-2);
+  
 
-   flex: 0 0 78%;
+  flex:0 0 90%;
   scroll-snap-align: start;
 }
 
 
 .tour-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-2px);
   box-shadow: var(--shadow-4);
   
 }
@@ -661,22 +662,23 @@
   overflow-y: hidden;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
-  padding-bottom: 8px;
+  padding-bottom: var(--space-2);
   scrollbar-width: none; /* firefox */
+  scrollbar-width:thin;
+  overscroll-behavior-x:contain;
 }
 
-.destinations-grid::-webkit-scrollbar {
-  display: auto; /* chrome / safari */
-}
+
 
 .destination-card {
   position: relative;
   overflow: hidden;
-  flex: 0 0 78%;
-  aspect-ratio: 4/5;
+  flex:0 0 90%;
+  aspect-ratio:4/5;
   border-radius: var(--radius-20);
   box-shadow: var(--shadow-1);
   scroll-snap-align: start;
+  max-height: 500px;
 }
 
 
@@ -791,6 +793,7 @@
 .destination-card:hover {
 
  box-shadow:var(--shadow-4);
+ 
 
 }
 
@@ -1219,6 +1222,12 @@ margin-top:60px;
 .slider-arrows {
   display: flex;
 }
+.tours-grid,
+  .destinations-grid {
+    scrollbar-width: none; 
+    -ms-overflow-style: none; 
+  }
+
 
 
   .features-grid {
@@ -1307,12 +1316,7 @@ margin-top:60px;
   font-size:var(--fs-7);
 
 }
-.tours-grid::-webkit-scrollbar {
-  display: none;   /* chrome and safari*/
-}
-.destinations-grid::-webkit-scrollbar {
-  display: none;   /* chrome and safari*/
-}
+
 .tour-card {
     flex: 0 0 calc(25% - 14px);
   }
