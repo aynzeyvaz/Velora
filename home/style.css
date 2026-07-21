@@ -13,6 +13,41 @@
   font-display: swap;
 }
 
+/* ===========================
+   Scroll Reveal Animation
+=========================== */
+
+
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition:
+    opacity .8s ease,
+    transform .8s cubic-bezier(.22,1,.36,1);
+}
+
+
+.reveal.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+
+.reveal-item {
+  opacity:0;
+  transform: translateY(30px);
+  transition:
+  opacity .7s ease,
+  transform .7s cubic-bezier(.22,1,.36,1);
+}
+
+
+.reveal-item.show {
+  opacity:1;
+  transform:translateY(0);
+}
+
 
 
 /* reused style */
@@ -444,6 +479,7 @@
   display: flex;
   gap: var(--space-4);
   overflow-x: auto;
+  overflow-y: hidden;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   padding-bottom: var(--space-2);
@@ -452,8 +488,9 @@
 }
 
 .tours-grid::-webkit-scrollbar {
-  display: none;   /* chrome and safari*/
+  display: auto;   /* chrome and safari*/
 }
+
 
 
 
@@ -621,6 +658,7 @@
   gap: var(--space-4);
   margin-top: var(--space-6);
   overflow-x: auto;
+  overflow-y: hidden;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   padding-bottom: 8px;
@@ -628,7 +666,7 @@
 }
 
 .destinations-grid::-webkit-scrollbar {
-  display: none; /* chrome / safari */
+  display: auto; /* chrome / safari */
 }
 
 .destination-card {
@@ -1269,6 +1307,12 @@ margin-top:60px;
   font-size:var(--fs-7);
 
 }
+.tours-grid::-webkit-scrollbar {
+  display: none;   /* chrome and safari*/
+}
+.destinations-grid::-webkit-scrollbar {
+  display: none;   /* chrome and safari*/
+}
 .tour-card {
     flex: 0 0 calc(25% - 14px);
   }
@@ -1278,6 +1322,8 @@ margin-top:60px;
 .destination-card {
   flex: 0 0 calc(25% - 14px);
   aspect-ratio: 7 / 8;
+}
+
 }
 
 @media (min-width: 1200px) {

@@ -361,9 +361,9 @@ async function renderTours() {
   const specialTours= await fetchSpecialTours();
 
   specialTours.forEach((tour) => {
-
+    
     const card = document.createElement("div");
-    card.classList.add("tour-card");
+    card.classList.add("tour-card", "reveal-item");
 
     card.innerHTML= `
     <a href="#"> 
@@ -405,7 +405,7 @@ async function renderTours() {
   if (toursGrid._refreshSlider) {
     toursGrid._refreshSlider();
   }
-
+  observeRevealItems();
 }
 
 // slider
@@ -562,7 +562,7 @@ function renderPopularDestinations(destinations){
 
   const card=document.createElement("article");
 
-  card.classList.add("destination-card");
+  card.classList.add("destination-card","reveal-item");
 
 
   card.innerHTML=`
@@ -604,6 +604,7 @@ function renderPopularDestinations(destinations){
   if (destinationsGrid._refreshSlider) {
     destinationsGrid._refreshSlider();
   }
+  observeRevealItems();
 
 
 }
@@ -650,7 +651,7 @@ function renderCategories(categories){
 
         const card=document.createElement("article");
 
-        card.className="category-card";
+        card.className="category-card reveal-item";
 
         card.innerHTML=`
 
@@ -688,7 +689,7 @@ function renderCategories(categories){
         categoriesGrid.appendChild(card);
 
     });
-    
+    observeRevealItems();
 
 }
 
@@ -758,7 +759,7 @@ function renderReviews(){
 
         const card = document.createElement("article");
 
-        card.className = "review-card";
+        card.className = "review-card reveal-item";
 
         card.innerHTML = `
 
@@ -789,17 +790,17 @@ function renderReviews(){
         reviewsGrid.appendChild(card);
 
     });
-
+   
+    observeRevealItems();
+    
 }
-
-renderReviews();
 
 
 async function initPage(){
   try {
-
+    
     await Promise.all([
-
+      
       fetchNavbarCategories(),
       fetchHeroData(),
       renderTours(),
@@ -807,6 +808,7 @@ async function initPage(){
       fetchCategories()
 
     ]);
+    renderReviews();
 
 
     hideLoader();
@@ -826,3 +828,66 @@ async function initPage(){
 }
 
 initPage();
+
+function observeRevealItems(){
+
+const items=document.querySelectorAll(
+".reveal-item:not(.observed)"
+);
+
+
+items.forEach(item=>{
+
+
+item.classList.add("observed");
+
+
+revealObserver.observe(item);
+
+
+
+});
+
+
+}
+
+const revealElements = document.querySelectorAll(
+  ".reveal, .reveal-item"
+);
+
+
+const revealObserver = new IntersectionObserver(
+(entries)=>{
+
+entries.forEach(entry=>{
+
+
+if(entry.isIntersecting){
+
+
+entry.target.classList.add("show");
+
+
+revealObserver.unobserve(entry.target);
+
+
+}
+
+
+
+});
+
+
+},
+{
+threshold:0.15
+}
+);
+
+
+
+revealElements.forEach(el=>{
+
+revealObserver.observe(el);
+
+});
