@@ -92,6 +92,7 @@ submenuItems.forEach((item) => {
   li.classList.add("submenu-item");
 
   li.innerHTML = `
+  <ion-icon name="earth-outline"></ion-icon>
     <a href="../result/result.html?destination=${encodeURIComponent(option)}"
       class="submenu-link">
       ${option}
@@ -126,34 +127,32 @@ submenuToggles.forEach((btn) => {
 
 
 // Hero Section 
+// hero section api
+const heroApi = "https://velora-1-cbh9.onrender.com/api/home/hero/";
+let heroData = [];
+let index = 0;
 
-const heroBgs = [ 
-  { 
-    image:"../assets/images/paris1.jpg",
-    title: "هر سفر، یک داستان تازه",
-    subTitle: "تورهای داخلی و خارجی رو جستجو کن و بهترین تجربه سفر رو بساز"
-  },
 
-  {
-     image:"../assets/images/paris2.jpg",
-     title: "دنیا بزرگ‌تر از چیزی‌ست که فکر می‌کنی",
-     subTitle: "وقتشه ببینی اون بیرون چه چیزهایی منتظر توئه."
-  },
+async function fetchHeroData(){
 
-  { 
-    image:"../assets/images/paris3.jpg",
-    title: "مقصدتو پیدا کن",
-    subTitle: "جستجو کن، انتخاب کن، سفر کن." 
-  },
+  try {
+    const response = await fetch(heroApi);
 
-  {
-   image:"../assets/images/paris4.jpg" ,
-   title: "سفرهای خاص برای آدم‌های خاص",
-   subTitle: "تجربه‌هایی فراتر از یک سفر معمولی."
-  }
+    if(!response.ok){
+      throw new Error("Hero API Error");
+    }
+
+    heroData = await response.json();
   
-  ];
 
+    startHeroSlider();
+  }
+  catch(error){
+    console.log(error);
+
+  }
+
+}
 
 
 const bg1 = document.querySelector(".hero-bg-1");
@@ -167,41 +166,52 @@ let activeBg = bg1;
 let inactiveBg= bg2;
 
 
-function changeHero() {
+function changeHero(){
+  const currentHero = heroData[count];
 
-  const currentBg = heroBgs[count];
-  count = (count +1) % heroBgs.length;
-  
+  count = (count + 1) % heroData.length;
 
-  [activeBg, inactiveBg] = [inactiveBg, activeBg]
+  [activeBg, inactiveBg] = [inactiveBg, activeBg];
 
-  inactiveBg.style.backgroundImage =`url(${currentBg.image})`;
+  inactiveBg.style.backgroundImage =
+  `url(${currentHero.images})`;
 
   inactiveBg.classList.add("active");
   inactiveBg.classList.remove("inactive");
-
+  
   activeBg.classList.add("inactive");
   activeBg.classList.remove("active");
 
   heroTitle.classList.add("hide");
   heroSubtitle.classList.add("hide");
 
-  setTimeout(() => {
-    
-  heroTitle.textContent = currentBg.title;
-  heroSubtitle.textContent = currentBg.subTitle;
+  setTimeout(()=>{
+    heroTitle.textContent = currentHero.title;
 
-  heroTitle.classList.remove("hide");
-  heroSubtitle.classList.remove("hide");
+    heroSubtitle.textContent =
+    currentHero.subtitle;
 
-  }, 600);
+    heroTitle.classList.remove("hide");
+    heroSubtitle.classList.remove("hide");
 
-  
+
+  },600);
+
 }
 
 
-setInterval(changeHero , 5000);
-changeHero();
+function startHeroSlider(){
+  changeHero();
+
+  setInterval(()=>{
+    changeHero();
+
+  },5000);
+
+
+}
+
+fetchHeroData();
 
 // month modal
 const monthInput = document.getElementById("month-input");
@@ -474,74 +484,68 @@ renderTours();
 
 
 // populR DESTINATION 
+// destinations api
 
-const destinations = [
+const popularDestinationsApi= "https://velora-1-cbh9.onrender.com/api/tours/popular/";
 
-{
-    name:"کیش",
-    tours:"۲۵ تور",
-    image:"../assets/images/category/category1.jpg"
-},
-{
-    name:"کیش",
-    tours:"۲۵ تور",
-    image:"../assets/images/category/category2.jpg"
-},
+const destinationsGrid= document.querySelector(".destinations-grid");
 
-{
-    name:"استانبول",
-    tours:"۱۸ تور",
-    image:"../assets/images/category/category3.jpg"
-},
+async function fetchPopularDestinations(){
 
-{
-    name:"دبی",
-    tours:"۱۲ تور",
-    image:"../assets/images/category/category4.jpg"
-},
+  try {
+    const response = await fetch(popularDestinationsApi);
 
-{
-    name:"شیراز",
-    tours:"۲۰ تور",
-    image:"../assets/images/category/category4.jpg"
+    if(!response.ok){
+      throw new Error("Popular destinations API Error");
+    }
+
+    const data = await response.json();
+
+    renderPopularDestinations(data);
+
+
+  }
+
+  catch(error){
+
+    console.log(error);
+
+  }
+
 }
 
-];
 
 
-const destinationsGrid = document.querySelector(".destinations-grid");
-
-
-function renderDestinations(){
+function renderPopularDestinations(destinations){
 
 
   destinationsGrid.innerHTML="";
 
-
   destinations.forEach(destination=>{
 
-
-  const card=document.createElement("div");
+  const card=document.createElement("article");
 
   card.classList.add("destination-card");
 
 
   card.innerHTML=`
 
-  <a href="#" class="destination-link">
-  <img src="${destination.image}"
+  <a href="../result/result.html?destination=${encodeURIComponent(destination.city)}" class="destination-link">
+
+  <img src="${destination.images}"
   alt="${destination.name}">
 
 
   <div class="destination-overlay">
     <div class="destination-info">
       <h3>
-      ${destination.name}
+      ${destination.city}
       </h3>
 
 
       <span>
-      ${destination.tours}
+      ${new Intl.NumberFormat('fa-IR').format(destination.tour_count)}
+              تور
       </span>
     
     
@@ -559,6 +563,7 @@ function renderDestinations(){
 
 
   });
+
   if (destinationsGrid._refreshSlider) {
     destinationsGrid._refreshSlider();
   }
@@ -567,79 +572,40 @@ function renderDestinations(){
 }
 
 
-renderDestinations();
+fetchPopularDestinations();
 
 
 // category
 
-const categories = [
+//  category api
 
-{
-    id:1,
-    title:"تورهای خارجی",
-    image:"../assets/images/category/category1.jpg",
-    options:[
-        "ترکیه",
-        "امارات",
-        "گرجستان",
-        "ارمنستان",
-        "تایلند",
-        "فرانسه",
-        "ایتالیا",
-        "سوئد",
-        "سوئیس",
-        "آلمان",
-        "اسپانیا",
-        "اندونزی",
-        "مالزی"
-    ]
-},
+const categoriesApi = "https://velora-1-cbh9.onrender.com/api/destinations/";
 
-{
-    id:2,
-    title:"تورهای داخلی",
-    image:"../assets/images/category/category2.jpg",
-    options:[
-        "کیش",
-        "قشم",
-        "مشهد",
-        "شیراز",
-        "اصفهان",
-        "چابهار"
-    ]
-},
+async function fetchCategories(){
 
-{
-    id:3,
-    title:"تورهای یک روزه",
-    image:"../assets/images/category/category3.jpg",
-    options:[
-        "ماسال",
-        "قلعه بابک",
-        "کندوان",
-        "آبشار لاتون",
-        "کویر مرنجاب"
-    ]
-},
+  try {
+    const response = await fetch(categoriesApi);
 
-{
-    id:4,
-    title:"تورهای ناشناس",
-    image:"../assets/images/category/category4.jpg",
-    options:[
-        "روستاهای بکر",
-        "جزایر ناشناخته",
-        "جنگل‌های شمال",
-        "کوهستان",
-        "دریاچه‌های مخفی"
-    ]
+    if(!response.ok){
+      throw new Error("Categories API Error");
+    }
+    const data = await response.json();
+    renderCategories(data);
+
+
+  }
+
+  catch(error){
+
+    console.log(error);
+
+  }
+
 }
-
-];
 
 const categoriesGrid = document.querySelector(".categories-grid");
 
-function renderCategories(){
+function renderCategories(categories){
 
     categoriesGrid.innerHTML="";
 
@@ -661,7 +627,7 @@ function renderCategories(){
                 <div class="category-overlay">
 
                     <div class="category-title">
-                        <h3>${category.title}</h3>
+                        <h3> تور‌های ${category.title}</h3>
 
                     </div>
 
@@ -670,10 +636,13 @@ function renderCategories(){
             </div>
 
             <div class="category-options">
+              ${category.options.map(option=>`
+                <a href="../result/result.html?destination=${encodeURIComponent(option)}">
+                        ${option}
+                    </a>
+                    `).join("")
+                }
 
-                ${category.options.map(item=>`
-                    <a href="#">${item}</a>
-                `).join("")}
 
             </div>
 
@@ -682,10 +651,10 @@ function renderCategories(){
         categoriesGrid.appendChild(card);
 
     });
+    
 
 }
-
-renderCategories();
+fetchCategories();
 
 
 // reviews
