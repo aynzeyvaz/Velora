@@ -1,12 +1,11 @@
 const loader = document.getElementById("preloader");
-
 document.body.style.overflow = "hidden";
 
-window.addEventListener("load", () => { 
+function hideLoader(){
   loader.classList.add("hidden");
   document.body.style.overflow = "auto";
-});
 
+}
 
 
 /**
@@ -138,7 +137,7 @@ function renderNavbarCategories(categories){
 
 
 }
-fetchNavbarCategories();
+
 
 
 
@@ -251,7 +250,7 @@ function startHeroSlider(){
 
 }
 
-fetchHeroData();
+
 
 // month modal
 const monthInput = document.getElementById("month-input");
@@ -519,8 +518,6 @@ searchForm.addEventListener("submit", function(event) {
 
 
 
-renderTours();
-
 
 
 // populR DESTINATION 
@@ -612,7 +609,7 @@ function renderPopularDestinations(destinations){
 }
 
 
-fetchPopularDestinations();
+
 
 
 // category
@@ -694,7 +691,7 @@ function renderCategories(categories){
     
 
 }
-fetchCategories();
+
 
 
 // reviews
@@ -796,3 +793,36 @@ function renderReviews(){
 }
 
 renderReviews();
+
+
+async function initPage(){
+  try {
+
+    await Promise.all([
+
+      fetchNavbarCategories(),
+      fetchHeroData(),
+      renderTours(),
+      fetchPopularDestinations(),
+      fetchCategories()
+
+    ]);
+
+
+    hideLoader();
+
+
+  }
+
+  catch(error){
+
+    console.log("Page Loading Error:", error);
+
+    hideLoader();
+
+  }
+
+
+}
+
+initPage();
