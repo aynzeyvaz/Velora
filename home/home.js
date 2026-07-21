@@ -56,51 +56,91 @@ window.addEventListener("scroll", () => {
 
 
 // Navbar Submenu (categories)
+// navbar api
 
-const navbarCategories = [
-  {
-    title: "تورهای خارجی",
-    options: ["ترکیه","امارات","گرجستان","ارمنستان","تایلند","فرانسه","ایتالیا","سوئد","سوئیس","آلمان","اسپانیا","اندونزی","مالزی"]
-  },
-  {
-    title: "تورهای داخلی",
-    options: ["کیش","قشم","مشهد","شیراز","اصفهان","چابهار"]
-  },
-  {
-    title: "تورهای یک روزه",
-    options: ["ماسال","قلعه بابک","کندوان","آبشار لاتون","کویر مرنجاب"]
-  },
-  {
-    title: "تورهای ناشناس",
-    options: ["روستاهای بکر","جزایر ناشناخته","جنگل‌های شمال","کوهستان","دریاچه‌های مخفی"]
+
+const submenuItems= document.querySelectorAll("[data-has-submenu]");
+const navbarCategoriesApi = "https://velora-1-cbh9.onrender.com/api/destinations/";
+
+async function fetchNavbarCategories(){
+
+  try {
+    const response = await fetch(navbarCategoriesApi);
+
+    if(!response.ok){
+      throw new Error("Navbar Categories Error");
+    }
+
+    const categories = await response.json();
+    renderNavbarCategories(categories);
+
+
   }
-];
 
-const submenuItems = document.querySelectorAll("[data-has-submenu]");
+  catch(error){
+    console.log(error);
 
-// پر کردن هر زیرمنو با گزینه‌های مربوطه
-submenuItems.forEach((item) => {
-  const linkText = item.querySelector(".navbar-link").textContent.replace("تور", "").trim();
-  const category = navbarCategories.find((cat) => cat.title.includes(linkText));
+  }
 
-  if (!category) return;
+}
 
-  const submenu = item.querySelector("[data-submenu]");
+function renderNavbarCategories(categories){
+  submenuItems.forEach((item)=>{
 
-  category.options.forEach((option) => {
-  const li = document.createElement("li");
-  li.classList.add("submenu-item");
+    const navbarTitle =
+    item.querySelector(".navbar-link")
+    .textContent
+    .trim();
 
-  li.innerHTML = `
-  <ion-icon name="earth-outline"></ion-icon>
-    <a href="../result/result.html?destination=${encodeURIComponent(option)}"
-      class="submenu-link">
-      ${option}
-    </a>`;
+    const submenu =
+    item.querySelector("[data-submenu]");
 
-  submenu.appendChild(li);
-});
-});
+    const category =
+    categories.find(
+      cat => 
+      navbarTitle.includes(cat.title)
+    );
+
+
+
+    if(!category) return;
+
+    submenu.innerHTML= "";
+
+    category.options.forEach(option=>{
+
+      const li=document.createElement("li");
+
+      li.classList.add("submenu-item");
+
+      li.innerHTML=`
+
+        <ion-icon name="earth-outline"></ion-icon>
+
+        <a 
+        href="../result/result.html?destination=${encodeURIComponent(option)}"
+        class="submenu-link">
+
+          ${option}
+
+        </a>
+
+      `;
+
+
+      submenu.appendChild(li);
+
+
+    });
+
+
+  });
+
+
+}
+fetchNavbarCategories();
+
+
 
 // آکاردئون برای موبایل
 const submenuToggles = document.querySelectorAll(".submenu-toggle");
