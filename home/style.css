@@ -36,7 +36,7 @@
 
 .reveal-item {
   opacity:0;
-  transform: translateY(30px);
+  transform: translateY(20px);
   transition:
   opacity .7s ease,
   transform .7s cubic-bezier(.22,1,.36,1);
