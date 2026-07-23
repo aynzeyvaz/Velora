@@ -809,16 +809,16 @@
 
 
 
-        <form class="reservation-form">
+        <form class="reservation-form" id="reservation-form">
 
           <div class="form-group">
             <label>نام و نام خانوادگی</label>
-            <input type="text" name="fullname" placeholder="مثلا حمید احمدی" required>
+            <input type="text" name="name" placeholder="مثلا حمید احمدی" required>
           </div>
 
           <div class="form-group">
             <label>کد ملی</label>
-            <input type="text" name="nationalId" placeholder="۱۰ رقم" maxlength="10" pattern="[0-9]{10}" required>
+            <input type="text" name="national_code" placeholder="۱۰ رقم" maxlength="10" pattern="[0-9]{10}" required>
           </div>
 
           <div class="form-group">
@@ -833,13 +833,14 @@
 
           <div class="form-group full">
             <label>تعداد نفرات</label>
-            <select name="passengerCount" required>
+            <select name="passengers" required>
               <option value="1">۱ نفر</option>
               <option value="2">۲ نفر</option>
               <option value="3">۳ نفر</option>
               <option value="4">۴ نفر</option>
             </select>
           </div>
+          <div class="reservation-message" id="reservation-message"></div>
 
           <button class="submit-reservation" type="submit">
             ثبت درخواست رزرو
@@ -887,9 +888,32 @@
 
 </div>
 
-<script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
 
+<div class="booking-success" id="booking-success">
+
+    <div class="success-box">
+
+        <ion-icon name="checkmark-circle-outline"></ion-icon>
+
+        <h3>
+            درخواست رزرو ثبت شد
+        </h3>
+
+        <p id="booking-success-message">
+    اطلاعات شما دریافت شد. کارشناسان ما به زودی با شما تماس خواهند گرفت.
+</p>
+
+        <button id="success-close">
+            متوجه شدم
+        </button>
+
+    </div>
+
+</div>
+
+  <script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js"></script>
   <script src="./details.js" defer></script>
+
 </body>
 </html>

@@ -152,12 +152,10 @@ function renderTourDetails(){
     dateGenerator(tourDetails.start_date);
 
 
-    // document.getElementById("tour-meals").textContent =
-    // tourDetails.meals;
+    document.getElementById("tour-meals").textContent =
+    tourDetails.meals;
 
 
-    // document.getElementById("tour-suitable").textContent =
-    // tourDetails.suitable;
 
 
 }
@@ -1146,3 +1144,145 @@ async function initTourPage(){
 
 
 initTourPage();
+
+
+
+// reserve form
+const reservationForm =
+document.getElementById("reservation-form");
+
+
+reservationForm.addEventListener("submit", async (e)=>{
+
+    e.preventDefault();
+
+
+    const formData = new FormData(reservationForm);
+
+
+    const bookingData = {
+
+        name: formData.get("name"),
+
+        national_code: formData.get("national_code"),
+
+        phone: formData.get("phone"),
+
+        email: formData.get("email"),
+
+        passengers: Number(
+            formData.get("passengers")
+        )
+
+    };
+
+
+    console.log(bookingData);
+
+
+    await sendBooking(bookingData);
+
+
+});
+
+async function sendBooking(data){
+
+    try{
+
+        const response = await fetch(
+            `https://velora-1-cbh9.onrender.com/bookings/${tourId}/`,
+            {
+                method:"POST",
+
+                headers:{
+                    "Content-Type":"application/json"
+                },
+
+                body:JSON.stringify(data)
+            }
+        );
+
+
+        const result = await response.json();
+
+
+        if(!response.ok){
+
+            throw new Error(
+                result.message || "Booking Error"
+            );
+
+        }
+
+
+        console.log(
+    "Booking Success:",
+    result
+);
+
+
+showBookingResult(result.message);
+reservationForm.reset();
+
+
+    }
+
+    catch(error){
+
+        console.error(
+            "Booking Error:",
+            error
+        );
+
+        alert(
+            "خطا در ثبت رزرو"
+        );
+
+    }
+
+}
+
+function showBookingResult(message){
+
+    const modal =
+    document.getElementById("booking-success");
+
+
+    const messageEl =
+    document.getElementById("booking-success-message");
+
+
+    if(messageEl){
+        messageEl.textContent = message;
+    }
+
+
+    modal.classList.add("active");
+
+}
+
+const successClose =
+document.getElementById("success-close");
+
+
+const successModal = document.getElementById("booking-success");
+
+
+successClose.addEventListener("click",()=>{
+
+    // بستن پیام موفقیت
+    successModal.classList.remove("active");
+
+
+    // بستن کامل فرم رزرو
+    modal.classList.remove("active");
+
+
+    // ریست فرم
+    reservationForm.reset();
+
+
+    // آزاد کردن اسکرول
+    document.body.style.overflow = "auto";
+
+});
