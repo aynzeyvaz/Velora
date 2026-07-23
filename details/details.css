@@ -34,7 +34,7 @@ section {
 }
 
 .login-btn:is(:hover, :focus-visible) {
-  background-color: var(--text-majorelle-blue);
+  background-color: var(--bg-majorelle-blue);
   opacity: 0.9;
   box-shadow: var(--shadow-2);
 }
@@ -52,7 +52,7 @@ section {
 }
 
 .btn-primary {
-  background-color: var(--text-majorelle-blue);
+  background-color: var(--bg-majorelle-blue);
   color: var(--text-white);
 }
 
@@ -486,7 +486,7 @@ section {
     top:0;
     right:0;
     left:0;
-    height:5px;
+    height:3px;
     background:
     linear-gradient(
         90deg,
@@ -1591,7 +1591,7 @@ height:50px;
 width:100%;
 border-radius:999px;
 background:
-var(--text-majorelle-blue);
+var(--bg-majorelle-blue);
 color:white;
 font-size:var(--fs-7);
 
