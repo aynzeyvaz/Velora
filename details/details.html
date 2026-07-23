@@ -141,7 +141,7 @@
             </div>
 
             <div class="details-grid">
-            
+
               <section class="tour-header reveal">
 
                 <span class="tour-badge" id="tour-badge"></span>
@@ -365,6 +365,10 @@
 
     </section>
 
+    <!--
+      هتل: گالری/توضیحات + امکانات + ویژگی‌ها همه
+      زیرِ یک سقف — چون همه درباره‌ی همان هتل هستند
+    -->
     <section class="hotel-section reveal">
 
 
@@ -392,12 +396,16 @@
     <div class="hotel-content">
 
 
-      <h3 id="hotel-title"></h3>
+      <div class="hotel-title-row">
+
+        <h3 id="hotel-title"></h3>
 
 
-      <div class="hotel-rating">
+        <div class="hotel-rating">
 
         <span id="hotel-stars"></span>
+
+        </div>
 
       </div>
 
@@ -428,69 +436,36 @@
 
   </div>
 
+  <!-- امکانات و ویژگی‌های هتل: زیرمجموعه‌ی خود کارت هتل -->
+  <div class="hotel-extra">
 
+    <div class="hotel-extra-block">
 
-    </section>
-
-    <section class="facilities-section reveal">
-
-
-      <div class="section-header">
-
-
-        <span class="section-icon"><ion-icon name="apps-outline"></ion-icon></span>
-
-
-        <h2>
-          امکانات هتل
-        </h2>
-
-
+      <div class="subsection-header">
+        <span class="subsection-icon"><ion-icon name="apps-outline"></ion-icon></span>
+        <h3>امکانات هتل</h3>
       </div>
 
-
-
-      <div
-      class="facilities-grid"
-      id="facilities-grid">
-
-
+      <div class="facilities-grid" id="facilities-grid">
         <!-- JS Render -->
-
       </div>
 
+    </div>
 
+    <div class="hotel-extra-block">
 
-    </section>
-
-    <section class="features-section reveal">
-
-
-      <div class="section-header">
-
-
-        <span class="section-icon"><ion-icon name="checkmark-circle-outline"></ion-icon></span>
-
-
-        <h2>
-          ویژگی‌های هتل
-        </h2>
-
-
+      <div class="subsection-header">
+        <span class="subsection-icon"><ion-icon name="checkmark-circle-outline"></ion-icon></span>
+        <h3>ویژگی‌های هتل</h3>
       </div>
 
-
-
-      <ul
-      class="hotel-features"
-      id="hotel-features">
-
-
+      <ul class="hotel-features" id="hotel-features">
         <!-- JS Render -->
-
       </ul>
 
+    </div>
 
+  </div>
 
     </section>
 
@@ -534,56 +509,80 @@
 
             <div class="reserve-card reveal">
 
-              <div class="reserve-eyebrow">بلیط سفر شما</div>
 
-              <div class="reserve-price">
+            <div class="reserve-header">
 
-
-                <span>
-                  قیمت تور
+                <span class="reserve-eyebrow">
+                    رزرو آنلاین تور
                 </span>
 
+                <ion-icon name="airplane-outline"></ion-icon>
 
-                <strong id="reserve-price">
+            </div>
 
+
+            <div class="reserve-destination">
+
+                <small>مقصد سفر:</small>
+
+                <strong id="reserve-destination">
+                    
                 </strong>
 
-
-              </div>
-
-              <div class="reserve-notch reserve-notch-right"></div>
-              <div class="reserve-notch reserve-notch-left"></div>
-
-              <div class="reserve-info">
+            </div>
 
 
-                <div>
-
-                  <ion-icon name="people-outline"></ion-icon>
-
-                  <span>
-                    ظرفیت باقی مانده
-                  </span>
+            <div class="reserve-price">
 
 
-                  <strong id="reserve-count"></strong>
+            <span>
+               قیمت به ازای هر نفر: 
+            </span>
 
 
-                </div>
+            <strong id="reserve-price"></strong>
 
 
-              </div>
+            </div>
 
-              <div class="ticket-barcode" aria-hidden="true"></div>
 
-              <button class="reserve-btn">
 
-                رزرو تور
+            <div class="reserve-info">
 
-                <ion-icon name="arrow-back-outline"></ion-icon>
 
-              </button>
+            <div>
 
+            <ion-icon name="people-outline"></ion-icon>
+
+            <div>
+            <span>
+            ظرفیت باقی مانده:
+            </span>
+
+            <strong id="reserve-count"></strong>
+
+            </div>
+
+            </div>
+
+
+
+            <div>
+
+            <ion-icon name="calendar-outline"></ion-icon>
+
+            <div>
+
+            <span>
+            تاریخ شروع:
+            </span>
+
+            <strong id="reserve-date"></strong>
+
+            </div>
+
+
+            </div>
 
 
 
@@ -591,7 +590,34 @@
 
 
 
-          </aside>
+            <div class="capacity-bar">
+
+            <div class="capacity-progress"></div>
+
+            </div>
+
+
+
+            <p class="reserve-note">
+
+            ظرفیت محدود است. برای ثبت درخواست رزرو اقدام کنید.
+
+            </p>
+
+
+            <button class="reserve-btn">
+
+            رزرو تور
+
+            <ion-icon name="arrow-forward-outline"></ion-icon>
+
+            </button>
+
+
+
+            </div>
+
+            </aside>
 
 
         </div>
@@ -743,5 +769,133 @@
 
   <script nomodule src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js"></script>
   <script src="./details.js" defer></script>
+
+<!-- reserve -->
+  <div class="reservation-modal" id="reservation-modal">
+
+    <div class="reservation-overlay"></div>
+
+
+    <div class="reservation-box">
+
+
+        <button class="reservation-close">
+            <ion-icon name="close-outline"></ion-icon>
+        </button>
+
+
+
+        <div class="reservation-header">
+
+            <span>
+                رزرو تور
+            </span>
+
+            <h2 id="modal-tour-title">
+                
+            </h2>
+
+        </div>
+
+
+
+        <div class="modal-summary">
+
+            <div>
+                <span>مقصد</span>
+                <strong id="modal-destination"></strong>
+            </div>
+
+
+            <div>
+                <span>قیمت</span>
+                <strong id="modal-price"></strong>
+            </div>
+
+
+        </div>
+
+
+
+
+
+        <form class="reservation-form">
+
+          <div class="form-group">
+            <label>نام و نام خانوادگی</label>
+            <input type="text" name="fullname" placeholder="مثلا علی احمدی" required>
+          </div>
+
+          <div class="form-group">
+            <label>کد ملی</label>
+            <input type="text" name="nationalId" placeholder="۱۰ رقم" maxlength="10" pattern="[0-9]{10}" required>
+          </div>
+
+          <div class="form-group">
+            <label>شماره تماس</label>
+            <input type="tel" name="phone" placeholder="0912..." pattern="09[0-9]{9}" required>
+          </div>
+
+          <div class="form-group">
+            <label>ایمیل</label>
+            <input type="email" name="email" placeholder="example@gmail.com" required>
+          </div>
+
+          <div class="form-group full">
+            <label>تعداد نفرات</label>
+            <select name="passengerCount" required>
+              <option value="1">۱ نفر</option>
+              <option value="2">۲ نفر</option>
+              <option value="3">۳ نفر</option>
+              <option value="4">۴ نفر</option>
+            </select>
+          </div>
+
+          <button class="submit-reservation" type="submit">
+            ثبت درخواست رزرو
+            <ion-icon name="arrow-back-outline"></ion-icon>
+          </button>
+
+        </form>
+
+
+
+    </div>
+
+</div>
+
+
+  <!-- HOTEL LIGHTBOX -->
+
+<div class="hotel-lightbox" id="hotel-lightbox">
+
+    <button class="lightbox-close">
+        <ion-icon name="close-outline"></ion-icon>
+    </button>
+
+
+    <button class="lightbox-prev">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+    </button>
+
+
+    <img 
+      class="lightbox-image"
+      id="lightbox-image"
+      src=""
+      alt="hotel image"
+    >
+
+
+    <button class="lightbox-next">
+        <ion-icon name="chevron-forward-outline"></ion-icon>
+    </button>
+
+
+    <div class="lightbox-counter" id="lightbox-counter">
+        1 / 6
+    </div>
+
+</div>
 </body>
 </html>

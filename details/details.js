@@ -96,6 +96,8 @@ const tourDetails = {
 
             "../assets/images/hotels/rome-hotel-3.jpg",
 
+            "../assets/images/hotels/rome-hotel-4.jpg",
+            "../assets/images/hotels/rome-hotel-4.jpg",
             "../assets/images/hotels/rome-hotel-4.jpg"
 
         ],
@@ -119,6 +121,22 @@ const tourDetails = {
 
         facilities: [
 
+            {
+                icon: "wifi-outline",
+                title: "WiFi رایگان"
+            },
+            {
+                icon: "wifi-outline",
+                title: "WiFi رایگان"
+            },
+            {
+                icon: "wifi-outline",
+                title: "WiFi رایگان"
+            },
+            {
+                icon: "wifi-outline",
+                title: "WiFi رایگان"
+            },
             {
                 icon: "wifi-outline",
                 title: "WiFi رایگان"
@@ -264,6 +282,22 @@ function formatPrice(price){
 
 function renderTourDetails(){
 
+    document.getElementById("modal-tour-title")
+    .textContent =
+    tourDetails.title;
+
+
+
+    document.getElementById("modal-destination")
+    .textContent =
+    tourDetails.city;
+
+
+
+    document.getElementById("modal-price")
+    .textContent =
+    formatPrice(tourDetails.price);
+
     document.getElementById("tour-details-title-h2")
     .textContent = tourDetails.title;
 
@@ -308,6 +342,14 @@ function renderTourDetails(){
     document.getElementById("reserve-price")
     .textContent =
     formatPrice(tourDetails.price);
+    document.getElementById("reserve-destination")
+    .textContent =
+    `${tourDetails.country} - ${tourDetails.city}`;
+
+
+    document.getElementById("reserve-date")
+    .textContent =
+    tourDetails.departureDates.start.day;
 
 
 
@@ -406,7 +448,9 @@ function renderHotel(){
 
   document.getElementById("hotel-stars")
   .textContent =
-  "★".repeat(tourDetails.hotel.stars);
+  "★".repeat(tourDetails.hotel.stars)
+  +
+  "☆".repeat(5-tourDetails.hotel.stars);
 
 
 
@@ -415,16 +459,236 @@ function renderHotel(){
   document.getElementById("hotel-gallery");
 
 
-  gallery.innerHTML =
-  tourDetails.hotel.images.map(img=>`
+  gallery.innerHTML = tourDetails.hotel.images.map((img,index)=>`
 
-  <img src="${img}" alt="hotel">
+<div class="hotel-image ${index === 0 ? "hotel-main-image" : ""}">
 
-  `).join("");
+    <img 
+        src="${img}" 
+        alt="${tourDetails.hotel.title}"
+    >
+
+    ${
+      index === 0 
+      ? `
+      <button class="gallery-overlay">
+          <ion-icon name="images-outline"></ion-icon>
+          <span>
+          ${tourDetails.hotel.images.length} عکس
+          </span>
+      </button>
+      `
+      :
+      ""
+    }
+
+</div>
+
+`).join("");
+const galleryBtn =
+document.querySelector(".gallery-overlay");
+
+
+if(galleryBtn){
+
+galleryBtn.addEventListener(
+"click",
+()=>openLightbox(0)
+);
+
+}
 
 
 
 }
+/* ================================
+   HOTEL LIGHTBOX
+================================ */
+
+
+const lightbox = document.getElementById("hotel-lightbox");
+
+const lightboxImage =
+document.getElementById("lightbox-image");
+
+
+const counter =
+document.getElementById("lightbox-counter");
+
+
+const closeBtn =
+document.querySelector(".lightbox-close");
+
+
+const prevBtn =
+document.querySelector(".lightbox-prev");
+
+
+const nextBtn =
+document.querySelector(".lightbox-next");
+
+
+
+let currentImageIndex = 0;
+
+
+
+function openLightbox(index){
+
+
+    currentImageIndex = index;
+
+
+    updateLightbox();
+
+
+    lightbox.classList.add("active");
+
+
+    document.body.style.overflow="hidden";
+
+}
+
+
+
+function closeLightbox(){
+
+
+    lightbox.classList.remove("active");
+
+
+    document.body.style.overflow="auto";
+
+}
+
+
+
+function updateLightbox(){
+
+
+    const images =
+    tourDetails.hotel.images;
+
+
+    lightboxImage.src =
+    images[currentImageIndex];
+
+
+    counter.textContent =
+    `${currentImageIndex+1} / ${images.length}`;
+
+
+}
+
+
+
+function nextImage(){
+
+
+    currentImageIndex++;
+
+
+    if(currentImageIndex >= tourDetails.hotel.images.length){
+
+        currentImageIndex=0;
+
+    }
+
+
+    updateLightbox();
+
+}
+
+
+
+
+function prevImage(){
+
+
+    currentImageIndex--;
+
+
+    if(currentImageIndex < 0){
+
+        currentImageIndex =
+        tourDetails.hotel.images.length-1;
+
+    }
+
+
+    updateLightbox();
+
+}
+
+
+
+
+
+nextBtn.addEventListener(
+"click",
+nextImage
+);
+
+
+
+prevBtn.addEventListener(
+"click",
+prevImage
+);
+
+
+
+closeBtn.addEventListener(
+"click",
+closeLightbox
+);
+
+
+
+
+lightbox.addEventListener(
+"click",
+(e)=>{
+
+    if(e.target === lightbox){
+
+        closeLightbox();
+
+    }
+
+});
+
+
+
+document.addEventListener(
+"keydown",
+(e)=>{
+
+
+    if(e.key==="Escape"){
+
+        closeLightbox();
+
+    }
+
+
+
+    if(e.key==="ArrowRight"){
+
+        nextImage();
+
+    }
+
+
+
+    if(e.key==="ArrowLeft"){
+
+        prevImage();
+
+    }
+
+
+});
 
 
 
@@ -577,11 +841,11 @@ const addEventOnElements = function(elements, eventType, callback) {
 
 const navbar = document.querySelector("[data-nav]");
 const navTogglers = document.querySelectorAll("[data-nav-toggler]");
-const overlay = document.querySelector("[data-overlay]");
+const navbarOverlay = document.querySelector("[data-overlay]");
 
 const toggleNav = function () {
   navbar.classList.toggle("active");
-  overlay.classList.toggle("active");
+  navbarOverlay.classList.toggle("active");
   document.body.classList.toggle("nav-active");
 }
 
@@ -752,3 +1016,50 @@ const observer = new IntersectionObserver((entries, observer) => {
 });
 
 document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+
+
+const reserveBtn =
+document.querySelector(".reserve-btn");
+
+
+const modal =
+document.getElementById("reservation-modal");
+
+
+reserveBtn.addEventListener("click",()=>{
+
+
+modal.classList.add("active");
+
+document.body.style.overflow="hidden";
+
+
+});
+
+const closeModal =
+document.querySelector(".reservation-close");
+
+
+const reservationOverlay  =
+document.querySelector(".reservation-overlay");
+
+
+function closeReservation(){
+
+modal.classList.remove("active");
+
+document.body.style.overflow="auto";
+
+}
+
+
+closeModal.addEventListener(
+"click",
+closeReservation
+);
+
+
+reservationOverlay .addEventListener(
+"click",
+closeReservation
+);
