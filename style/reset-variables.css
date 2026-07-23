@@ -171,10 +171,12 @@ body {
   color: var(--text-granite-gray);
   font-size: var(--fs-6);
   line-height: 2;
-  text-align: justify;
+  /* text-align: justify; */
   
 
 }
+
+
 body.nav-active {
   overflow: hidden;
 }

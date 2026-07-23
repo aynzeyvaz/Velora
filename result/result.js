@@ -413,6 +413,7 @@ async function fetchSearchTours(sort=""){
   }
 
     renderTours(data.result);
+    console.log(data.result);
   }
   catch (err) {
     console.error(err);
@@ -499,7 +500,11 @@ function renderTours(tours) {
                     <span>تومان</span>
                   </div>
               </div>
-              <button class="tour-btn">
+              <button 
+                class="tour-btn"
+                data-tour-id="${tour.id}"
+                data-tour-city="${tour.city}"
+                data-tour-country="${tour.country}">
                 مشاهده جزئیات
               </button>
             </div>
@@ -532,6 +537,37 @@ function renderTours(tours) {
       observer.observe(card);
     });
   });
+
+  const detailButtons = document.querySelectorAll(".tour-btn");
+
+
+detailButtons.forEach(button => {
+
+  button.addEventListener("click", () => {
+
+
+    const id = button.dataset.tourId;
+    const city = button.dataset.tourCity;
+    const country = button.dataset.tourCountry;
+
+
+    const params = new URLSearchParams();
+
+
+    params.append("id", id);
+    params.append("city", city);
+    params.append("country", country);
+
+
+
+    window.location.href =
+    `../details/details.html?${params.toString()}`;
+
+
+  });
+
+
+});
 
   
 

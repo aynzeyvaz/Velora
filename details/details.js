@@ -1,274 +1,64 @@
-// fake datas
+const params = new URLSearchParams(window.location.search);
 
-const heroData=
-{
-    "heroImages": [
-        "https://res.cloudinary.com/dkfvrqgkh/image/upload/v1783718543/venice_4_irrbbf.jpg",
-        "https://res.cloudinary.com/dkfvrqgkh/image/upload/v1783716242/claudio-schwarz-TScGhJM716g-unsplash_sydz7c.jpg",
-        "https://res.cloudinary.com/dkfvrqgkh/image/upload/v1783716235/simon-vollformat-VFXYkDjAfKk-unsplash_vgsjvc.jpg",
-        "https://res.cloudinary.com/dkfvrqgkh/image/upload/v1783716294/levin-i8IPxSMJWtA-unsplash_bkxh58.jpg",
-        "https://res.cloudinary.com/dkfvrqgkh/image/upload/v1783718563/venice_1_devdej.jpg"
-    ]
+
+const tourId = params.get("id");
+const city = params.get("city");
+const country = params.get("country");
+
+
+
+
+function dateGenerator(startDate) {
+  const [year, month, day] =
+    startDate.split("-");
+
+
+    const date = new Date(
+        year,
+        month - 1,
+        day
+    );
+
+
+    return date.toLocaleDateString(
+        "fa-IR",
+        {
+            day:"numeric",
+            month:"long",
+            year:"numeric"
+        }
+    );
+
+}
+// اطلاعات اصلی تور
+
+let tourDetails = null;
+
+async function fetchTourDetails(){
+    try{
+
+        const response = await fetch(
+            `https://velora-1-cbh9.onrender.com/api/tour/${tourId}`
+        );
+
+        if(!response.ok){
+
+            throw new Error(
+                "Tour Details API Error"
+            );
+        }
+        tourDetails = await response.json();
+             
+
+    }
+    catch(error){
+
+        console.error(error);
+
+    }
 }
 
-const tourDetails = {
 
-    id: 1,
-
-    title: "تور رویایی ایتالیا؛ سفر به قلب تاریخ و هنر",
-
-    description:
-        "در این سفر جذاب از شهرهای تاریخی ایتالیا مانند رم، فلورانس و ونیز بازدید می‌کنید و تجربه‌ای فراموش‌نشدنی از فرهنگ، غذا و معماری این کشور خواهید داشت.",
-
-    badge: "پرفروش",
-
-    country: "ایتالیا",
-
-    city: "ونیز",
-
-    duration: 7,
-
-    meals: "صبحانه",
-
-    suitable: "خانواده‌ها، زوج‌ها و علاقه‌مندان به تاریخ",
-
-    price: 85000000,
-
-    remaining: 6,
-
-    departureDates: {
-
-        start: {
-            day: "1405/05/08",
-            time: "12:00"
-        },
-
-        end: {
-            day: "1405/05/15",
-            time: "18:30"
-        }
-
-    },
-
-    flight: {
-
-        departure: {
-
-            date: "1405/05/08",
-
-            origin: "تهران",
-
-            destination: "رم",
-
-            airline: "Qatar Airways",
-
-            number: "QR499",
-
-            time: "12:00"
-
-        },
-
-        return: {
-
-            date: "1405/05/15",
-
-            origin: "رم",
-
-            destination: "تهران",
-
-            airline: "Qatar Airways",
-
-            number: "QR498",
-
-            time: "18:30"
-
-        }
-
-    },
-
-    hotel: {
-
-        images: [
-
-            "../assets/images/hotels/rome-hotel-1.jpg",
-
-            "../assets/images/hotels/rome-hotel-2.jpg",
-
-            "../assets/images/hotels/rome-hotel-3.jpg",
-
-            "../assets/images/hotels/rome-hotel-4.jpg",
-            "../assets/images/hotels/rome-hotel-4.jpg",
-            "../assets/images/hotels/rome-hotel-4.jpg"
-
-        ],
-
-        title: "Grand Rome Hotel",
-
-        description:
-            "هتل Grand Rome یکی از هتل‌های ۴ ستاره محبوب شهر رم است که در موقعیتی مناسب نزدیک به جاذبه‌های اصلی شهر قرار دارد. این هتل با اتاق‌های مدرن، خدمات حرفه‌ای و امکانات کامل، اقامتی راحت و آرام را برای مسافران فراهم می‌کند.",
-
-        location: {
-
-            country: "ایتالیا",
-
-            city: "رم",
-
-            address: "Via Nazionale 45, Rome, Italy"
-
-        },
-
-        stars: 4,
-
-        facilities: [
-
-            {
-                icon: "wifi-outline",
-                title: "WiFi رایگان"
-            },
-            {
-                icon: "wifi-outline",
-                title: "WiFi رایگان"
-            },
-            {
-                icon: "wifi-outline",
-                title: "WiFi رایگان"
-            },
-            {
-                icon: "wifi-outline",
-                title: "WiFi رایگان"
-            },
-            {
-                icon: "wifi-outline",
-                title: "WiFi رایگان"
-            },
-
-            {
-                icon: "restaurant-outline",
-                title: "رستوران"
-            },
-
-            {
-                icon: "car-outline",
-                title: "پارکینگ"
-            },
-
-            {
-                icon: "fitness-outline",
-                title: "باشگاه ورزشی"
-            },
-
-            {
-                icon: "cafe-outline",
-                title: "صبحانه رایگان"
-            },
-
-            {
-                icon: "bed-outline",
-                title: "خدمات اتاق"
-            }
-
-        ],
-
-        features: [
-
-            "۵ دقیقه فاصله تا مرکز شهر",
-
-            "دسترسی آسان به مترو",
-
-            "اتاق‌های مجهز و مدرن",
-
-            "مناسب برای خانواده‌ها",
-
-            "پرسنل چندزبانه",
-
-            "نزدیک به جاذبه‌های گردشگری"
-
-        ]
-
-    },
-
-    itinerary: [
-
-        {
-
-            day: 1,
-
-            title: "ورود به رم",
-
-            description:
-                "ورود به فرودگاه رم، استقبال توسط لیدر تور، انتقال به هتل و استراحت."
-
-        },
-
-        {
-
-            day: 2,
-
-            title: "بازدید از جاذبه‌های رم",
-
-            description:
-                "بازدید از کولوسئوم، واتیکان، میدان اسپانیا و خیابان‌های تاریخی رم."
-
-        },
-
-        {
-
-            day: 3,
-
-            title: "سفر به فلورانس",
-
-            description:
-                "حرکت به فلورانس و بازدید از معماری رنسانس، کلیساها و موزه‌های معروف."
-
-        },
-
-        {
-
-            day: 4,
-
-            title: "تجربه شهر ونیز",
-
-            description:
-                "قایق‌سواری در کانال‌های ونیز، بازدید از میدان سن مارکو و پل ریالتو."
-
-        },
-
-        {
-
-            day: 5,
-
-            title: "خرید و زمان آزاد",
-
-            description:
-                "زمان آزاد برای خرید، گردش شخصی و تجربه غذاهای محلی ایتالیا."
-
-        },
-
-        {
-
-            day: 6,
-
-            title: "بازگشت به رم",
-
-            description:
-                "بازگشت به رم، استراحت و آماده شدن برای پرواز برگشت."
-
-        },
-
-        {
-
-            day: 7,
-
-            title: "پایان سفر",
-
-            description:
-                "انتقال به فرودگاه و پایان تور."
-
-        }
-
-    ]
-
-};
 
 function formatPrice(price){
 
@@ -277,14 +67,50 @@ function formatPrice(price){
 
 }
 
+// hero bakcground
 
+let heroData = {
+    heroImages: []
+};
+async function fetchHero(){
+    try{
+        const response = await fetch(
+            `https://velora-1-cbh9.onrender.com/api/tour/hero/${tourId}`
+        );
 
+        if(!response.ok){
+            throw new Error(
+                "Hero API Error"
+            );
+        }
 
+        const data = await response.json();
+
+        heroData.heroImages =
+        data.images.map(item => item.image);
+        console.log("Hero:", heroData);
+    }
+    catch(error){
+        console.error(error);
+    }
+
+}
+
+// اطلاعات اصلی
+
+function toPersianNumber(number){
+
+    return String(number).replace(
+        /\d/g,
+        digit => "۰۱۲۳۴۵۶۷۸۹"[digit]
+    );
+
+}
 function renderTourDetails(){
 
     document.getElementById("modal-tour-title")
     .textContent =
-    tourDetails.title;
+    tourDetails.subtitle;
 
 
 
@@ -299,7 +125,7 @@ function renderTourDetails(){
     formatPrice(tourDetails.price);
 
     document.getElementById("tour-details-title-h2")
-    .textContent = tourDetails.title;
+    .textContent = tourDetails.subtitle;
 
 
 
@@ -319,138 +145,266 @@ function renderTourDetails(){
 
 
     document.getElementById("tour-duration").textContent =
-    `${tourDetails.duration} روز و ${tourDetails.duration - 1} شب`;
+    `${toPersianNumber(tourDetails.duration)} روز و ${toPersianNumber(tourDetails.duration - 1)} شب`;
 
 
     document.getElementById("tour-start-date").textContent =
-    tourDetails.departureDates.start.day;
+    dateGenerator(tourDetails.start_date);
 
 
-    document.getElementById("tour-meals").textContent =
-    tourDetails.meals;
+    // document.getElementById("tour-meals").textContent =
+    // tourDetails.meals;
 
 
     // document.getElementById("tour-suitable").textContent =
     // tourDetails.suitable;
 
 
+}
+
+function renderReserveCard(){
+
+    const capacityProgress =
+    document.getElementById("capacity-progress");
 
 
+    if(capacityProgress){
 
-    // reserve
-
-    document.getElementById("reserve-price")
-    .textContent =
-    formatPrice(tourDetails.price);
-    document.getElementById("reserve-destination")
-    .textContent =
-    `${tourDetails.country} - ${tourDetails.city}`;
-
-
-    document.getElementById("reserve-date")
-    .textContent =
-    tourDetails.departureDates.start.day;
-
-
-
-    document.getElementById("reserve-count")
-    .textContent =
-    `${tourDetails.remaining} نفر`;
-
-
-
-
-    renderFlight()
-
-    renderHotel();
-
-    renderFacilities();
-
-    renderFeatures();
-
-    renderItinerary();
+        const totalCapacity = 30;
+        const remaining =
+        tourDetails.remaining_capacity;
+        const usedPercent =
+        ((totalCapacity - remaining) / totalCapacity) * 100;
+        capacityProgress.style.width =
+        `${usedPercent}%`;
 
 
 }
 
 
+    const price =
+    document.getElementById("reserve-price");
 
-function renderFlight() {
 
-    const departure = tourDetails.flight.departure;
-    const back = tourDetails.flight.return;
+    const destination =
+    document.getElementById("reserve-destination");
 
-    // رفت
+
+    const date =
+    document.getElementById("reserve-date");
+
+
+    const count =
+    document.getElementById("reserve-count");
+
+
+
+    if(price){
+        price.textContent =
+        formatPrice(tourDetails.price);
+
+    }
+
+    if(destination){
+        destination.textContent =
+        `${tourDetails.country} - ${tourDetails.city}`;
+
+    }
+    if(date){
+        date.textContent =
+        dateGenerator(tourDetails.start_date);
+    }
+
+
+    if(count){
+        count.textContent =
+        `${toPersianNumber(tourDetails.remaining_capacity)} نفر`;
+
+    }
+
+}
+
+
+
+// پرواز
+function formatTime(time){
+
+    if(!time) return "";
+
+    const [hour, minute] = time.split(":");
+
+
+    return `${hour}:${minute}`.replace(
+        /\d/g,
+        digit => "۰۱۲۳۴۵۶۷۸۹"[digit]
+    );
+
+}
+
+function formatFlightDate(date){
+
+ const [year,month,day]=date.split("-");
+
+ return new Date(
+    year,
+    month-1,
+    day
+ ).toLocaleDateString(
+    "fa-IR",
+    {
+       day:"numeric",
+       month:"long",
+       year:"numeric"
+    }
+ );
+
+}
+
+let flightData = null;
+
+async function fetchFlight(){
+
+    try{
+        const response = await fetch(
+            `https://velora-1-cbh9.onrender.com/api/flight/${tourId}`
+        );
+        if(!response.ok){
+
+            throw new Error(
+                "Flight API Error"
+            );
+        }
+
+        flightData = await response.json();
+        console.log("Flight:", flightData);
+    }
+
+    catch(error){
+        console.error(error);
+    }
+
+}
+function renderFlight(){
+
+    if(!flightData){
+        console.warn("No flight data");
+        return;
+    }
+    const departure =
+    flightData.departure_flight;
+    const arrival =
+    flightData.arrival_flight;
+
+    //  رفت
 
     document.getElementById("departure-date").textContent =
-        departure.date;
+    formatFlightDate(departure.departure_date);
 
     document.getElementById("departure-origin").textContent =
-        departure.origin;
+    departure.origin;
 
     document.getElementById("departure-destination").textContent =
-        departure.destination;
+    departure.destination;
 
     document.getElementById("departure-airline").textContent =
-        departure.airline;
+    departure.airline;
 
     document.getElementById("departure-number").textContent =
-        departure.number;
+    toPersianNumber(departure.number);
 
     document.getElementById("departure-time").textContent =
-        departure.time;
+    formatTime(departure.departure_time);
 
 
-    // برگشت
+    //  برگشت
 
     document.getElementById("return-date").textContent =
-        back.date;
+    formatFlightDate(arrival.arrival_date);
 
     document.getElementById("return-origin").textContent =
-        back.origin;
+    arrival.origin;
 
     document.getElementById("return-destination").textContent =
-        back.destination;
+    arrival.destination;
 
     document.getElementById("return-airline").textContent =
-        back.airline;
+    arrival.airline;
 
     document.getElementById("return-number").textContent =
-        back.number;
+    toPersianNumber(arrival.number);
 
     document.getElementById("return-time").textContent =
-        back.time;
+    formatTime(arrival.arrival_time);
+
 
 }
+
+
+// هتل
+let hotelData = null;
+async function fetchHotel(){
+
+    try{
+  
+        const response = await fetch(
+            `https://velora-1-cbh9.onrender.com/api/hotel/${tourId}`
+        );
+
+        if(!response.ok){
+
+            throw new Error(
+                "Hotel API Error"
+            );
+        }
+        const data = await response.json();
+
+        hotelData = {
+            ...data,
+            images:
+            data.images.map(item=>item.image)
+
+        };
+
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+    }
+
+
+}
+
 
 
 
 function renderHotel(){
 
-
   document.getElementById("hotel-title")
   .textContent =
-  tourDetails.hotel.title;
+  hotelData.title;
 
 
 
   document.getElementById("hotel-description")
   .textContent =
-  tourDetails.hotel.description;
+  hotelData.description;
 
 
 
   document.getElementById("hotel-address")
   .textContent =
-  tourDetails.hotel.location.address;
+  hotelData.location.address;
 
 
 
   document.getElementById("hotel-stars")
   .textContent =
-  "★".repeat(tourDetails.hotel.stars)
+  "★".repeat(hotelData.stars)
   +
-  "☆".repeat(5-tourDetails.hotel.stars);
+  "☆".repeat(5-hotelData.stars);
 
 
 
@@ -459,13 +413,13 @@ function renderHotel(){
   document.getElementById("hotel-gallery");
 
 
-  gallery.innerHTML = tourDetails.hotel.images.map((img,index)=>`
+  gallery.innerHTML = hotelData.images.map((img,index)=>`
 
 <div class="hotel-image ${index === 0 ? "hotel-main-image" : ""}">
 
     <img 
         src="${img}" 
-        alt="${tourDetails.hotel.title}"
+        alt="${hotelData.title}"
     >
 
     ${
@@ -474,7 +428,7 @@ function renderHotel(){
       <button class="gallery-overlay">
           <ion-icon name="images-outline"></ion-icon>
           <span>
-          ${tourDetails.hotel.images.length} عکس
+          ${toPersianNumber(hotelData.images.length)} عکس
           </span>
       </button>
       `
@@ -501,6 +455,9 @@ galleryBtn.addEventListener(
 
 
 }
+
+
+
 /* ================================
    HOTEL LIGHTBOX
 ================================ */
@@ -540,11 +497,7 @@ function openLightbox(index){
 
 
     updateLightbox();
-
-
     lightbox.classList.add("active");
-
-
     document.body.style.overflow="hidden";
 
 }
@@ -567,7 +520,7 @@ function updateLightbox(){
 
 
     const images =
-    tourDetails.hotel.images;
+    hotelData.images;
 
 
     lightboxImage.src =
@@ -575,7 +528,7 @@ function updateLightbox(){
 
 
     counter.textContent =
-    `${currentImageIndex+1} / ${images.length}`;
+    `${toPersianNumber(images.length)} / ${toPersianNumber(currentImageIndex + 1)}`;
 
 
 }
@@ -588,7 +541,7 @@ function nextImage(){
     currentImageIndex++;
 
 
-    if(currentImageIndex >= tourDetails.hotel.images.length){
+    if(currentImageIndex >= hotelData.images.length){
 
         currentImageIndex=0;
 
@@ -611,7 +564,7 @@ function prevImage(){
     if(currentImageIndex < 0){
 
         currentImageIndex =
-        tourDetails.hotel.images.length-1;
+        hotelData.images.length-1;
 
     }
 
@@ -696,7 +649,7 @@ document.addEventListener(
 
 
 
-
+// امکانات
 
 function renderFacilities(){
 
@@ -705,12 +658,13 @@ const container =
 document.getElementById("facilities-grid");
 
 
+
 container.innerHTML =
-tourDetails.hotel.facilities.map(item=>`
+hotelData.facilities.map(item=>`
 
 <div class="facility-item">
 
-<ion-icon name="${item.icon}"></ion-icon>
+<ion-icon name="${item.icon || "checkmark-circle-outline"}"></ion-icon>
 
 <span>${item.title}</span>
 
@@ -727,7 +681,7 @@ tourDetails.hotel.facilities.map(item=>`
 
 
 
-
+// ویژگی ها
 function renderFeatures(){
 
 
@@ -737,7 +691,7 @@ document.getElementById("hotel-features");
 
 
 container.innerHTML =
-tourDetails.hotel.features
+hotelData.features
 .map(item=>`<li>${item}</li>`)
 .join("");
 
@@ -751,72 +705,129 @@ tourDetails.hotel.features
 
 
 
+// برنامه 
+let itineraryData = [];
+
+async function fetchItinerary(){
+
+    try{
+
+        const response = await fetch(
+            `https://velora-1-cbh9.onrender.com/api/tour/itinerary/${tourId}`
+        );
+               
+        if(!response.ok){
+            throw new Error(
+                "Itinerary API Error"
+            );
+        }
+        itineraryData = await response.json();
+    }
+    catch(error){
+
+        console.error(error);
+
+    }
+}
+
+// تبدیل به لیست 
+function formatItineraryDescription(description) {
+
+
+    const lines = description
+    .split(/\r?\n/)
+    .map(line => line.trim())
+    .filter(line => line !== "");
+
+    if(lines.length === 1){
+
+        return `
+        <p>
+            ${lines[0]}
+        </p>
+        `;
+
+    }
+
+    const intro = lines[0];
+
+
+    const listItems = lines
+    .slice(1)
+    .map(item => `
+
+        <li>
+            <ion-icon name="checkmark-circle-outline"></ion-icon>
+            <span>${item}</span>
+        </li>
+
+    `)
+    .join("");
+
+
+
+    return `
+
+        <p>
+            ${intro}
+        </p>
+
+
+        <ul class="itinerary-points">
+
+            ${listItems}
+
+        </ul>
+
+    `;
+
+}
 
 function renderItinerary(){
 
 
-const container =
-document.getElementById("itinerary-list");
+    const container =
+    document.getElementById("itinerary-list");
 
 
+    container.innerHTML =
+    itineraryData.map(item=>`
 
-container.innerHTML =
-tourDetails.itinerary.map(item=>`
-
-<div class="itinerary-item">
-
-
-<div class="day-number">
-
-${item.day}
-
-</div>
+    <div class="itinerary-item">
 
 
+    <div class="day-number">
 
-<div class="day-content">
+    ${toPersianNumber(item.day)}
 
-<h3>
-${item.title}
-</h3>
-
-
-<p>
-${item.description}
-</p>
+    </div>
 
 
-</div>
+    <div class="day-content">
+
+    <h3>
+    ${item.title}
+    </h3>
 
 
-</div>
+    <p>
+    ${formatItineraryDescription(item.description)}
+    </p>
 
 
-`).join("");
+    </div>
 
+
+    </div>
+
+
+    `).join("");
 
 
 }
 
 
 
-
-renderTourDetails();
-
-
-
-
-
-
-
-const pageLoader = document.getElementById("preloader");
-
-document.body.style.overflow = "hidden";
-
-window.addEventListener("load", () => {
-  pageLoader.classList.add("hidden");
-  document.body.style.overflow = "auto";
-});
 
 
 
@@ -943,7 +954,6 @@ submenuToggles.forEach((btn) => {
 
 
 
-const fallbackBg = document.querySelector(".hero-bg-fallback");
 const apiBgs = document.querySelectorAll(".hero-bg-api");
 let activeApiLayer = null;
 let nextLayerIndex = 0;
@@ -954,7 +964,7 @@ let count = 0;
 let firstHeroLoad = true;
 
 
-startHeroSlider(heroData.heroImages);
+
 
 function startHeroSlider(images) {
   changeHero(images);
@@ -981,7 +991,7 @@ function changeHero(images) {
     if (activeApiLayer) {
       activeApiLayer.classList.remove("active");
     }
-    fallbackBg.classList.remove("active");
+
 
     activeApiLayer = incomingLayer;
   });
@@ -1063,3 +1073,76 @@ reservationOverlay .addEventListener(
 "click",
 closeReservation
 );
+
+
+// loading untill api ready
+
+const pageLoader = document.getElementById("preloader");
+
+// init
+
+async function initTourPage(){
+
+    try{
+        document.body.style.overflow = "hidden";
+        
+        await Promise.all([
+            fetchHero(),
+            fetchTourDetails(),
+            fetchFlight(),
+            fetchHotel(),
+            fetchItinerary()
+        ]);
+
+        if(heroData.heroImages.length){
+
+            startHeroSlider(heroData.heroImages);
+
+}
+
+
+        renderTourDetails();
+        renderFlight();
+        renderHotel();
+        renderFacilities();
+        renderFeatures();
+        renderItinerary();
+        renderReserveCard();
+
+
+
+    }
+
+
+    catch(error){
+
+
+        console.error(
+            "Tour Page Error:",
+            error
+        );
+
+
+    }
+
+
+    finally{
+
+        if(pageLoader){
+            pageLoader.classList.add("hidden");
+
+        }
+        document.body.style.overflow = "auto";
+
+
+    }
+
+
+    }
+
+
+
+
+
+
+initTourPage();

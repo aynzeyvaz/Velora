@@ -173,9 +173,6 @@ section {
   opacity: 0;
 }
 
-.hero-bg-fallback {
-  background-image: url('../assets/images/fallback/hero-fallback.jpg');
-}
 
 .hero-bg.active {
   opacity: 1;
@@ -254,9 +251,10 @@ section {
 
 .tour-description {
   color: var(--td-ink-soft);
-  font-size: var(--fs-6);
+  font-size:var(--fs-7);
+  text-align: justify;
 
-  line-height:2.1;
+
 }
 
 
@@ -560,7 +558,7 @@ section {
 
 .flight-route small {
   color:var(--td-ink-soft);
-  font-size:var(--fs-8);
+  font-size:var(--fs-7);
 }
 
 
@@ -576,8 +574,8 @@ section {
   display:flex;
   justify-content:center;
   align-items:center;
-  width:40px;
-  height:40px;
+  width:30px;
+  height:30px;
   padding:10px;
   border-radius:var(--radius-pill);
   color:var(--text-majorelle-blue);
@@ -896,19 +894,19 @@ grid-row:span 2;
 
 .hotel-title-row{
 
-display:flex;
+  display:flex;
 
-align-items:center;
+  align-items:baseline;
 
-justify-content:space-between;
+  justify-content:space-between;
 
-gap:var(--space-3);
+  gap:var(--space-3);
 
-margin-bottom:var(--space-4);
+  margin-bottom:var(--space-4);
 
-}
+  }
 
-
+/* 
 .hotel-rating{
 
   background:var(--bg-lavender-blush);
@@ -917,13 +915,13 @@ margin-bottom:var(--space-4);
   padding: var(--space-1);
   border:1px solid var(--td-line);
 
-}
+} */
 
 
 .hotel-rating span{
 
-font-size:var(--fs-6);
-
+font-size:var(--fs-4);
+color:var(--bg-majorelle-blue);
 letter-spacing:2px;
 
 }
@@ -940,6 +938,7 @@ letter-spacing:2px;
   line-height:2;
   font-size:var(--fs-7);
   color:var(--td-ink-soft);
+  text-align: justify;
 
 
 }
@@ -1284,9 +1283,7 @@ letter-spacing:2px;
 
 
 /* ================================
- ITINERARY — a dashed rail line
- connects the day stamps, like a
- train-ticket stub
+ ITINERARY
 ================================ */
 
 .itinerary-list {
@@ -1349,6 +1346,43 @@ letter-spacing:2px;
 .day-content p {
   color: var(--td-ink-soft);
   font-size: var(--fs-7);
+}
+.itinerary-points {
+
+  margin-top: var(--space-2);
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 10px;
+
+  padding-right: 0;
+
+}
+
+
+.itinerary-points li {
+  list-style: none;
+  display: flex;
+  align-items:baseline;
+  gap: 8px;
+  color: var(--td-ink-soft);
+  font-size: var(--fs-7);
+
+}
+
+
+.itinerary-points ion-icon {
+
+  flex-shrink: 0;
+
+  margin-top: 3px;
+
+  color: var(--text-majorelle-blue);
+
+  font-size: 18px;
+
 }
 
 
