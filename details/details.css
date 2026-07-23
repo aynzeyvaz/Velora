@@ -1,0 +1,1105 @@
+@font-face {
+  font-family: 'Vazir';
+  src: url('../assets/fonts/Vazir.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Vazir';
+  src: url('../assets/fonts/Vazir-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+/* reused style */
+
+
+.container {
+  width: min(1200px, calc(100% - var(--space-8)));
+  margin-inline: auto
+}
+
+section {
+  padding-block: 0;
+}
+
+/* BTN */
+
+.login-btn {
+  background-color: #b4b4b4;
+  color: var(--text-white);
+}
+
+.login-btn:is(:hover, :focus-visible) {
+  background-color: var(--text-majorelle-blue);
+  opacity: 0.9;
+  box-shadow: var(--shadow-2);
+}
+
+.btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding-block: var(--space-3);
+  padding-inline: var(--space-5);
+  width: 100px;
+  height: 50px;
+  border-radius: var(--radius-pill);
+  transition: var(--transition-1);
+}
+
+.btn-primary {
+  background-color: var(--text-majorelle-blue);
+  color: var(--text-white);
+}
+
+.btn-primary:is(:hover, :focus-visible) {
+  background-color: var(--td-brand-dark);
+  box-shadow: var(--shadow-2);
+}
+
+.btn:focus-visible,
+.reserve-btn:focus-visible {
+  outline: 2px solid var(--text-majorelle-blue);
+  outline-offset: 3px;
+}
+
+
+/* PRELOADER */
+
+#preloader {
+  background: #ffffff url(../assets/images/preloader.svg) no-repeat center center;
+  background-size: 30%;
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 900;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+#preloader.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+
+/* tours grid loading */
+.tours-grid.loading {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+
+/* API LOADER */
+
+.api-loader {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+}
+.api-loader.active {
+  display: flex;
+}
+.api-loader img {
+  width: 200px;
+  height: 200px;
+}
+
+
+/* ================================
+   REVEAL ON SCROLL
+================================ */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity .7s cubic-bezier(.2,.7,.3,1), transform .7s cubic-bezier(.2,.7,.3,1);
+}
+.reveal.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+.details-grid > section.reveal:nth-child(1) { transition-delay: 0s; }
+.details-grid > section.reveal:nth-child(2) { transition-delay: .06s; }
+.details-grid > section.reveal:nth-child(3) { transition-delay: .12s; }
+.details-grid > section.reveal:nth-child(4) { transition-delay: .18s; }
+.details-grid > section.reveal:nth-child(5) { transition-delay: .24s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .reveal.show {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+
+/* ================================
+   HERO
+================================ */
+
+.hero {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow: visible;
+  padding-block-start: var(--space-6);
+  padding-block-end: var(--space-9);
+}
+
+.hero .container {
+  position: relative;
+  height: 340px;
+  overflow: visible;
+  border-radius: var(--radius-20);
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: opacity 3500ms ease;
+  border-radius: var(--radius-20);
+  opacity: 0;
+}
+
+.hero-bg-fallback {
+  background-image: url('../assets/images/fallback/hero-fallback.jpg');
+}
+
+.hero-bg.active {
+  opacity: 1;
+  z-index: 1;
+}
+
+.hero-bg.inactive {
+  opacity: 0;
+  z-index: 0;
+}
+
+.hero-overlay {
+  z-index: 1;
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(12, 16, 32, .88) 0%, rgba(12, 16, 32, .35) 45%, rgba(12, 16, 32, .12) 100%);
+  border-radius: var(--radius-20);
+}
+
+/* Floating ticket-tag title card */
+.tour-header {
+  position: relative;
+  z-index: 2;
+  border: 1px solid var(--td-line);
+  border-radius: var(--radius-20);
+  text-align: right;
+  padding: var(--space-5);
+  box-shadow: var(--shadow-1);
+  /* border: 1px solid var(--td-line);
+  border-top: 3px solid var(--text-majorelle-blue); */
+  background-color: var(--bg-white);
+  overflow: hidden;
+  transition:.35s;
+}
+.tour-header:hover{
+  transform:translateY(-4px);
+  box-shadow:0 18px 40px rgba(0,0,0,.08);
+
+}
+
+.tour-header::before{
+    content:"";
+    position:absolute;
+    inset:0 0 auto 0;
+    height:5px;
+    border-radius:20px 20px 0 0;
+    background:linear-gradient(
+        90deg,
+        var(--text-majorelle-blue),
+        var(--text-majorelle-blue)
+        
+    );
+}
+
+.tour-badge {
+  display: inline-flex;
+  /* margin-inline-start: var(--space-3); */
+  background: var(--bg-lavender-blush);
+  color: var(--text-majorelle-blue);
+  font-size: var(--fs-10);
+  font-weight: var(--fw-bold);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-2);
+  border: 1px solid var(--td-line);
+}
+
+.tour-badge:empty { display: none; }
+
+.tour-title {
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-4);
+  color: var(--text-gunmetal);
+  margin-block: var(--space-3);
+  line-height:1.5;
+  letter-spacing:-.3px;
+  max-width:700px;
+}
+
+.tour-description {
+  color: var(--td-ink-soft);
+  font-size: var(--fs-6);
+
+  line-height:2.1;
+}
+
+
+/* ================================
+   TOUR DETAILS
+================================ */
+
+.tour-details {
+  padding-block-end: var(--space-7);
+}
+
+.details-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+}
+
+
+/* ================================
+   SECTIONS
+================================ */
+
+.details-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.tour-info-section,
+.hotel-section,
+.flight-section,
+.facilities-section,
+.features-section,
+.itinerary-section {
+  position: relative;
+  background: var(--bg-white);
+  border-radius: var(--radius-20);
+  padding: var(--space-5);
+  box-shadow: var(--shadow-1);
+  /* border: 1px solid var(--td-line);
+  border-top: 3px solid var(--text-majorelle-blue); */
+  overflow: hidden;
+  transition: box-shadow var(--tc-transition), transform var(--tc-transition), border-color var(--tc-transition);
+}
+.tour-info-section::before,
+.hotel-section::before,
+.flight-section::before,
+.facilities-section::before,
+.features-section::before,
+.itinerary-section::before {
+  content:"";
+    position:absolute;
+    inset:0 0 auto 0;
+    height:5px;
+    border-radius:20px 20px 0 0;
+    background:linear-gradient(
+        90deg,
+        var(--text-majorelle-blue),
+        var(--text-majorelle-blue)
+    );
+  
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.section-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 46px;
+  height: 46px;
+  min-width: 46px;
+  border-radius: 50%;
+  background: var(--bg-white);
+  border: 1px solid var(--text-majorelle-blue);
+}
+
+.section-icon ion-icon {
+  color: var(--text-majorelle-blue);
+  font-size: var(--fs-5);
+}
+
+.section-header h2 {
+  font-size: var(--fs-6);
+  color: var(--text-gunmetal);
+}
+
+
+/* ================================
+   TOUR INFO
+================================ */
+
+.tour-info-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3);
+}
+
+.info-box {
+  position:relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  background: var(--bg-white);
+  padding: var(--space-4);
+  border:1px solid var(--td-line);
+  border-radius: var(--radius-10);
+  transition: var(--transition-1);
+  transition:.35s ease;
+  overflow:hidden;
+    background:
+  linear-gradient(
+      145deg,
+      #ffffff,
+      #fafaff
+  );
+
+
+
+ 
+
+
+
+}
+.info-box::after{
+
+  content:"";
+  position:absolute;
+  width:80px;
+  height:80px;
+  left:-40px;
+  top:-40px;
+
+  background:var(--bg-lavender-blush);
+  border-radius:var(--radius-pill);
+  border: 1ps solid var(--td-line);
+  transition:.4s;
+
+}
+
+
+.info-box:hover::after{
+
+ transform:scale(1.3);
+
+}
+
+.info-box:hover {
+  transform:translateY(-3px);
+  border-color:var(--text-majorelle-blue);
+
+  box-shadow:
+  0 12px 30px rgba(0,0,0,.08);
+}
+
+.info-box ion-icon {
+  font-size: var(--fs-5);
+  color: var(--text-majorelle-blue);
+
+  flex:none;
+  border: 1ps solid var(--td-line);
+
+  display:flex;
+
+  justify-content:center;
+  align-items:center;
+
+  padding:var(--space-2);
+
+  border-radius:var(--radius-pill);
+
+  background: var(--bg-lavender-blush);
+}
+
+.info-box .info-content {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  align-items: baseline;
+}
+
+.info-box span {
+  font-size: var(--fs-7);
+  color: var(--td-ink-soft);
+}
+
+.info-box strong {
+  font-size: var(--fs-7);
+  font-weight: var(--fw-bold);
+  color: var(--text-gunmetal);
+}
+
+
+
+
+
+/* ================================
+   flight 
+================================ */
+.flight-section{
+  position:relative;
+  background:var(--bg-white);
+  border-radius:var(--radius-20);
+  padding:var(--space-5);
+  box-shadow:var(--shadow-1);
+}
+
+.flight-grid{
+  display:grid;
+  gap:var(--space-4);
+}
+
+.flight-card{
+  position:relative;
+  border:1px solid var(--td-line);
+  border-radius:var(--radius-20);
+  padding:var(--space-5);
+  background:var(--bg-white);
+
+  background:
+  linear-gradient(
+      145deg,
+      #ffffff,
+      #fafaff
+  );
+
+  overflow:hidden;
+
+  transition:.35s ease;
+
+
+}
+.flight-card::before{
+    content:"";
+    position:absolute;
+    top:0;
+    right:0;
+    left:0;
+    height:5px;
+    background:
+    linear-gradient(
+        90deg,
+        var(--text-majorelle-blue),
+        #8fb6ff
+    );
+
+}
+
+
+.flight-card:hover{
+  transform:translateY(-6px);
+  box-shadow:
+  0 20px 45px rgba(0,0,0,.10);
+
+}
+
+.flight-card-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:var(--space-4);
+    padding-bottom:var(--space-3);
+    border-bottom:2px dashed var(--td-line);
+
+
+}
+
+.flight-card-header h3{
+    font-size:var(--fs-6);
+    color:var(--text-gunmetal);
+    font-weight: var(--fw-bold);
+}
+
+.flight-card-header span{
+
+    color:var(--td-ink-soft);
+
+    font-size:var(--fs-8);
+
+}
+
+.flight-route{
+   display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  margin-bottom: var(--space-5);
+  background: rgba(91,93,255,.04);
+  border-radius: var(--radius-10);
+  border: 1px solid var(--td-line);
+
+}
+
+.flight-route > div {
+  display:flex;
+  flex-direction:column;
+  gap:var(--space-1);
+  
+}
+
+
+.flight-route > div:last-child {
+  text-align:left;
+}
+
+
+.flight-route small {
+  color:var(--td-ink-soft);
+  font-size:var(--fs-8);
+}
+
+
+.flight-route strong {
+  color:var(--text-gunmetal);
+  font-size:2rem;
+  font-weight:700;
+}
+
+
+.flight-route ion-icon {
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  width:40px;
+  height:40px;
+  padding:10px;
+  border-radius:var(--radius-pill);
+  color:var(--text-majorelle-blue);
+  font-size:var(--fs-4);
+  transform:rotate(180deg);
+  
+
+
+}
+.flight-details{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:var(--space-3);
+  border-top:2px dashed var(--td-line);
+  padding-top:var(--space-4);
+
+}
+.flight-details div{
+  padding:var(--space-3);
+  border: 1px solid var(--td-line);
+  border-radius:var(--radius-10);
+  background:
+  rgba(91,93,255,.04);
+  text-align: start;
+
+}
+
+.flight-details span{
+    display:block;
+    color:var(--td-ink-soft);
+    font-size:var(--fs-8);
+    margin-bottom:6px;
+
+}
+
+.flight-details strong{
+
+    color:var(--text-gunmetal);
+
+    font-size:var(--fs-7);
+
+}
+/* ================================
+   HOTEL
+================================ */
+
+.hotel-card {
+  display:flex;
+  flex-direction:column;
+  gap:var(--space-5);
+}
+
+
+.hotel-gallery {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  grid-template-rows:160px 80px;
+  gap:8px;
+  overflow:hidden;
+  border-radius:var(--radius-20);
+}
+
+.hotel-gallery img {
+   width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:.4s ease;
+}
+
+.hotel-gallery img:nth-child(1) {
+  grid-column: span 2;
+  grid-row: span 2;
+
+}
+.hotel-gallery img:hover{
+  transform:scale(1.05);
+
+}
+.hotel-content{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:var(--space-3);
+
+}
+
+.hotel-content h3 {
+  font-size:2.4rem;
+  color:var(--text-gunmetal);
+  margin-bottom:var(--space-3);
+  font-weight:var(--fw-bold);
+}
+
+.hotel-rating {
+
+  display:inline-flex;
+  width:max-content;
+  align-items:center;
+  gap:6px;
+  padding:6px 14px;
+  background:rgba(91,93,255,.08);
+  border-radius:var(--radius-pill);
+  color:var(--text-majorelle-blue);
+  margin-bottom:var(--space-4);
+
+}
+.hotel-rating span{
+
+  font-weight:700;
+
+  font-size:1.6rem;
+
+}
+
+
+.hotel-rating ion-icon{
+
+  font-size:var(--fs-5);
+
+}
+
+
+.hotel-content p {
+  color:var(--td-ink-soft);
+  line-height:2.1;
+  font-size:var(--fs-6);
+  margin-bottom:var(--space-4);
+
+}
+
+.hotel-location {
+  display:flex;
+  align-items:center;
+  gap:var(--space-1);
+  padding-top:var(--space-3);
+  border-top:1px dashed var(--td-line);
+  color:var(--td-ink-soft);
+  font-size: var(--fs-7);
+}
+
+.hotel-location ion-icon{
+  font-size: var(--fs-5);
+  padding:6px;
+  border-radius:50%;
+  background:rgba(91,93,255,.1);
+
+  color:var(--text-majorelle-blue);
+
+}
+
+/* ================================
+ FACILITIES
+================================ */
+
+.facilities-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-3);
+}
+
+.facility-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: var(--space-3);
+  background: var(--bg-white);
+  border-radius: var(--radius-10);
+  transition: var(--transition-1);
+}
+
+.facility-item:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-1);
+}
+
+.facility-item ion-icon {
+  color: var(--text-majorelle-blue);
+  font-size: 2.2rem;
+}
+
+
+/* ================================
+ FEATURES
+================================ */
+
+.hotel-features {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.hotel-features li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--td-ink-soft);
+}
+
+.hotel-features li::before {
+  content: "✓";
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--text-majorelle-blue);
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: bold;
+  flex: none;
+}
+
+
+/* ================================
+ ITINERARY — a dashed rail line
+ connects the day stamps, like a
+ train-ticket stub
+================================ */
+
+.itinerary-list {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.itinerary-list::before {
+  content: "";
+  position: absolute;
+  top: 22px;
+  bottom: 22px;
+  right: 22px;
+  border-right: 2px dashed var(--text-majorelle-blue);
+}
+
+.itinerary-item {
+  position: relative;
+  display: flex;
+  gap: var(--space-4);
+}
+
+.day-number {
+  position: relative;
+  z-index: 1;
+  min-width: 45px;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--text-majorelle-blue);
+  color: white;
+  border-radius: 50%;
+  font-weight: 700;
+  box-shadow: 0 0 0 4px var(--td-bg), 0 0 0 5px var(--text-majorelle-blue);
+}
+
+.day-content {
+  background: var(--bg-white);
+  border-radius: var(--radius-10);
+  padding: var(--space-3) var(--space-4);
+  flex: 1;
+}
+
+.day-content h3 {
+  font-size: 1.8rem;
+  color: var(--text-gunmetal);
+  margin-bottom: 8px;
+}
+
+.day-content p {
+  color: var(--td-ink-soft);
+  line-height: 2;
+}
+
+
+/* ================================
+ RESERVE — signature element:
+ a literal perforated boarding pass
+================================ */
+
+.reserve-card {
+  position: relative;
+  background: var(--bg-white);
+  border-radius: var(--radius-20);
+  padding: var(--space-5);
+  box-shadow: var(--shadow-2);
+  border: 1px solid var(--td-line);
+  overflow: hidden;
+}
+
+.reserve-eyebrow {
+  font-size: 1.2rem;
+  letter-spacing: .5px;
+  color: var(--text-majorelle-blue);
+  font-weight: 700;
+  margin-bottom: var(--space-3);
+  text-transform: uppercase;
+}
+
+.reserve-price {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: var(--space-4);
+  border-bottom: 2px dashed var(--text-majorelle-blue);
+}
+
+.reserve-price span {
+  color: var(--td-ink-soft);
+}
+
+.reserve-price strong {
+  color: var(--td-wine);
+  font-size: var(--fs-5);
+}
+
+/* the tear-notch cutouts, like a real ticket stub */
+.reserve-notch {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  background: #fff;
+  border: 1px solid var(--td-line);
+  border-radius: 50%;
+  top: calc(var(--space-5) + 78px);
+}
+.reserve-notch-right { right: -12px; }
+.reserve-notch-left { left: -12px; }
+
+.reserve-info {
+  padding-block: var(--space-4);
+}
+
+.reserve-info div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--td-ink-soft);
+}
+
+.reserve-info ion-icon {
+  color: var(--text-majorelle-blue);
+  font-size: 1.8rem;
+}
+
+.reserve-info strong {
+  color: var(--text-gunmetal);
+}
+
+/* decorative barcode, purely evocative of a paper ticket */
+.ticket-barcode {
+  height: 34px;
+  margin-bottom: var(--space-4);
+  background-image: repeating-linear-gradient(
+    to right,
+    var(--text-gunmetal) 0px, var(--text-gunmetal) 2px,
+    transparent 2px, transparent 4px,
+    var(--text-gunmetal) 4px, var(--text-gunmetal) 5px,
+    transparent 5px, transparent 8px,
+    var(--text-gunmetal) 8px, var(--text-gunmetal) 11px,
+    transparent 11px, transparent 13px
+  );
+  background-repeat: repeat-x;
+  opacity: .55;
+  border-radius: 2px;
+}
+
+.reserve-btn {
+  width: 100%;
+  height: 55px;
+  border-radius: var(--radius-pill);
+  background: var(--text-majorelle-blue);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.6rem;
+  transition: var(--transition-1);
+}
+
+.reserve-btn:hover {
+  background: var(--td-brand-dark);
+  box-shadow: var(--shadow-2);
+}
+
+.reserve-btn ion-icon {
+  font-size: 1.8rem;
+}
+
+
+/**
+  * Media Queries
+  */
+
+@media (min-width: 575px) {
+
+  .container {
+    max-width: 540px;
+  }
+
+  .hero .container {
+    height: min(460px, 55vh);
+  }
+}
+
+
+@media (min-width: 768px) {
+
+  :root {
+    --fs-1: 4.8rem;
+    --fs-2: 4rem;
+    --fs-3: 2.8rem;
+    --fs-4: 2.6rem;
+    --fs-5: 2.2rem;
+    --fs-6: 1.8rem;
+    --fs-7: 1.6rem;
+  }
+
+  .container {
+    max-width: 640px;
+  }
+  .hero .container {
+    height: 420px;
+  }
+
+  .tour-info-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .hotel-gallery {
+    grid-auto-rows: 110px;
+  }
+  .flight-grid{
+
+        grid-template-columns:repeat(2,1fr);
+
+    }
+}
+
+
+@media (min-width: 992px) {
+
+  .container {
+    max-width: 950px;
+  }
+
+  .hero .container {
+    height: min(560px, 65vh);
+  }
+
+  .hero-card {
+    max-width: 560px;
+    left: var(--space-6);
+    right: auto;
+    bottom: -64px;
+  }
+
+  .details-layout {
+    grid-template-columns: 1fr 330px;
+    align-items: start;
+  }
+
+
+
+  .reserve {
+    position: sticky;
+    top: 100px;
+    height: max-content;
+  }
+
+  .hotel-card {
+    flex-direction: row;
+  }
+
+  .hotel-gallery {
+    width: 50%;
+    grid-auto-rows: 100px;
+  }
+
+  .hotel-content {
+    width: 50%;
+  }
+}
+
+@media (min-width: 1200px) {
+
+  :root {
+    --fs-1: 6.4rem;
+    --fs-2: 4.8rem;
+    --fs-3: 3rem;
+  }
+
+  .container {
+    max-width: 1150px;
+  }
+}
+
+@media (min-width: 1400px) {
+
+  :root {
+    --fs-1: 7.2rem;
+  }
+
+  .container {
+    max-width: 1350px;
+  }
+  .tour-card-grid { grid-template-columns: repeat(4, 1fr); }
+}

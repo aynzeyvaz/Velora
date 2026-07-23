@@ -1,7 +1,4 @@
 
-
-
-
 @font-face {
   font-family: 'Vazir';
   src: url('../assets/fonts/Vazir.woff2') format('woff2');
@@ -37,15 +34,6 @@ section {
 .login-btn {
   background-color: #b4b4b4;
   color: var(--text-white);
-
-  /* padding-inline: 30px;
-  border-radius: var(--radius-pill);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  /* max-width: max-content; */
-  /* transition: var(--transition-1);  */
 }
 
  .login-btn:is(:hover, :focus-visible)
@@ -54,21 +42,6 @@ section {
    opacity: 0.8;
    box-shadow: var(--shadow-2);
    }
-
-/* 
-.btn {
-  width: 100px;
-  height: 50px;
-  color: var(--text-white);
-  padding-inline: 30px;
-  border-radius: var(--radius-pill);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  max-width: max-content;
-  transition: var(--transition-1);
-}  */
 
 .btn {
 
@@ -183,7 +156,6 @@ section {
 
 .hero-bg.active {
   opacity: 1;
-  /* transform: scale(1); */
   z-index: 1; 
   }
 
@@ -349,18 +321,9 @@ section {
 
 
 
-/* result Tours */
-/* .result-tours-title {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  margin-bottom: 40px;
-} */
-
 .result-tours {
   /* padding-block-start: var(--space-2); */
-  padding-block-end: var(--space-5);
+  padding-block-end: var(--space-7);
 }
 
 .result-tours-title h2 {
@@ -376,43 +339,6 @@ section {
   gap: var(--space-6);
 }
 
-
-
-/* .result-tours-title {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  margin-bottom: 40prdx;
-}
-
-.result-tours-title h2 {
-  font-size: var(--fs-5);
-  font-weight: var(--fw-bold);
-  color:var(--text-majorelle-blue);
-}
-
-.result-tours-title span {
-  height: 2px;
-  flex: 1;
-  border-radius: 999px;
-}
-
-.result-tours-title span.right {
-  background: linear-gradient(
-    to left,
-    rgba(26, 83, 189, 0.5),
-    transparent
-  );
-}
-.result-tours-title span.left {
-  background: linear-gradient(
-    to right,
-    rgba(26, 83, 189, 0.5),
-    transparent
-  );
-}
- */
 
  /* filters */
 
@@ -571,6 +497,7 @@ section {
   height: 100%;
   padding: var(--tc-space-card);
   gap: var(--space-7);
+  border: 1px solid var(--td-line);
 }
 
 
@@ -599,7 +526,7 @@ section {
 /* badge */
 .tour-card-badge {
   position: absolute;
-  top: 12px;
+  top: var(--space-3);
   inset-inline-start: var(--space-3); 
   background: var(--bg-lavender-blush);
   color: var(--text-majorelle-blue);

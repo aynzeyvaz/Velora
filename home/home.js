@@ -213,7 +213,7 @@ function changeHero(){
   [activeBg, inactiveBg] = [inactiveBg, activeBg];
 
   inactiveBg.style.backgroundImage =
-  `url(${currentHero.images})`;
+  `url(${currentHero.image})`;
 
   inactiveBg.classList.add("active");
   inactiveBg.classList.remove("inactive");
@@ -569,7 +569,7 @@ function renderPopularDestinations(destinations){
 
   <a href="../result/result.html?destination=${encodeURIComponent(destination.city)}" class="destination-link">
 
-  <img src="${destination.images}"
+  <img src="${destination.image}"
   alt="${destination.name}">
 
 

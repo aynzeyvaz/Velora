@@ -23,16 +23,22 @@
 
   /* text color */
   --text-white: hsl(0, 0%, 100%);
-  --text-gunmetal: rgb(15, 23, 42);
+  --text-gunmetal: #1c2740;  
   --text-footer: #cbd5e1;
   /* --text-gunmetal: hsl(209, 40%, 14%); */
   --text-price: #e21388;
   --text-granite-gray: hsl(210, 4%, 38%);
   --text-majorelle-blue: hsl(213, 66%, 36%);
   --text-sunglow: hsl(0, 63%, 59%);
-
+  --td-ink: #1c2740;  
+  --td-ink-soft: #55617c;
   /* border color */
   --border-gainsboro: hsl(0, 1%, 85%);
+
+  
+  --td-brand-dark: #262f6e;
+  --td-wine: #723241;       /* chianti — badge, seal */
+  --td-line: rgba(28, 39, 64, 0.09);
 
   /**
    * TYPOGRAPHY
@@ -165,6 +171,7 @@ body {
   color: var(--text-granite-gray);
   font-size: var(--fs-6);
   line-height: 2;
+  text-align: justify;
   
 
 }

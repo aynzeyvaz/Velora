@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Velora یک وب‌سایت مدرن برای جستجو و رزرو تورهای گردشگری است که به کاربران کمک می‌کند سفرهای خاص و به‌یادماندنی خود را برنامه‌ریزی کنند.">
+  <meta name="title" content="Velora | رزرو تور و تجربه‌های خاص سفر">
+  <title>Velora | رزرو تور و تجربه‌های خاص سفر</title>
+  <link rel="icon" href="../assets/images/temp-logo.svg">
+  <link rel="stylesheet" href="../style/reset-variables.css">
+  <link rel="stylesheet" href="../component/footer/footer.css">
+  <link rel="stylesheet" href="../component/header/resultHeader.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./details.css">
+
+</head>
+<body>
+  <div id="preloader">
+  </div>
+
+
+<!-- HEADER -->
+<header class="header" data-header>
+  <div class="container">
+
+    <a href="#" class="logo">
+      <img src="../assets/images/temp-logo.svg" height="38" alt="logo">
+    </a>
+
+    <nav class="navbar" data-nav>
+      <div class="navbar-top">
+        <a href="#" class="logo">
+          <img src="../assets/images/temp-logo.svg" height="38" alt="logo">
+        </a>
+
+        <button class="nav-toggle-btn" aria-label="close menu" data-nav-toggler>
+          <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
+
+        </button>
+      </div>
+      <ul class="navbar-list">
+        <li class="navbar-item"><a href="#" class="navbar-link">خانه</a></li>
+
+        <li class="navbar-item has-submenu" data-has-submenu>
+          <div class="navbar-link-wrap">
+            <a href="#" class="navbar-link">تور داخلی</a>
+            <button type="button" class="submenu-toggle" aria-expanded="false" aria-label="نمایش زیرمنو">
+              <ion-icon name="chevron-down-outline"></ion-icon>
+            </button>
+          </div>
+          <ul class="submenu" data-submenu></ul>
+        </li>
+
+        <li class="navbar-item has-submenu" data-has-submenu>
+          <div class="navbar-link-wrap">
+            <a href="#" class="navbar-link">تور خارجی</a>
+            <button type="button" class="submenu-toggle" aria-expanded="false" aria-label="نمایش زیرمنو">
+              <ion-icon name="chevron-down-outline"></ion-icon>
+            </button>
+          </div>
+          <ul class="submenu" data-submenu></ul>
+        </li>
+
+        <li class="navbar-item has-submenu" data-has-submenu>
+          <div class="navbar-link-wrap">
+            <a href="#" class="navbar-link">تور یک روزه</a>
+            <button type="button" class="submenu-toggle" aria-expanded="false" aria-label="نمایش زیرمنو">
+              <ion-icon name="chevron-down-outline"></ion-icon>
+            </button>
+          </div>
+          <ul class="submenu" data-submenu></ul>
+        </li>
+
+        <li class="navbar-item has-submenu" data-has-submenu>
+          <div class="navbar-link-wrap">
+            <a href="#" class="navbar-link">تور ناشناس</a>
+            <button type="button" class="submenu-toggle" aria-expanded="false" aria-label="نمایش زیرمنو">
+              <ion-icon name="chevron-down-outline"></ion-icon>
+            </button>
+          </div>
+          <ul class="submenu" data-submenu></ul>
+        </li>
+      </ul>
+
+      <div class="header-action">
+        <div class="loggedout">
+          <a href="./auth/login.html" class="btn login-btn"> ورود</a>
+          <a href="./auth/signup.html" class="btn btn-primary">عضویت</a>
+        </div>
+        <div class="loggedin">
+          <a href="#" class="login-btn"> پنل کاربری</a>
+          <a href="#" class="btn btn-primary">خروج </a>
+
+        </div>
+
+      </div>
+
+
+      <button> </button>
+    </nav>
+
+    <button class="nav-toggle-btn" aria-label="open menu" data-nav-toggler>
+      <ion-icon name="menu-outline" aria-hidden="true"></ion-icon>
+    </button>
+
+    <div class="overlay" data-overlay data-nav-toggler></div>
+  </div>
+</header>
+
+<!--  Main-->
+
+<main>
+   <!-- Hero Section-->
+    <section class="hero" data-hero>
+      <div class="container">
+        <div class="hero-bg hero-bg-fallback active"></div>
+        <div class="hero-bg hero-bg-api"></div>
+        <div class="hero-bg hero-bg-api"></div>
+
+        <div class="hero-overlay"></div>
+        </div>
+
+
+    </section>
+
+
+
+    <section class="tour-details">
+
+      <div class="container">
+
+        <div class="details-layout">
+
+          <!-- قسمت اصلی -->
+          <div class="details-container">
+
+            <div class="api-loader">
+              <img src="../assets/images/loading.svg" alt="loading">
+            </div>
+
+            <div class="details-grid">
+            
+              <section class="tour-header reveal">
+
+                <span class="tour-badge" id="tour-badge"></span>
+
+                <h1 class="tour-title" id="tour-details-title-h2"></h1>
+
+                <p class="tour-description" id="tour-details-description"></p>
+
+              </section>
+
+              <section class="tour-info-section reveal">
+
+                <div class="section-header">
+                  <span class="section-icon"><ion-icon name="information-circle-outline"></ion-icon></span>
+                  <h2>اطلاعات تور</h2>
+
+
+                </div>
+
+                <div class="tour-info-grid">
+                  <div class="info-box">
+                    <ion-icon name="location-outline"></ion-icon>
+
+                    <div class="info-content">
+                      <span>مقصد:</span>
+                      <strong id="tour-destination"></strong>
+                    </div>
+
+
+                  </div>
+
+                  <div class="info-box">
+                    <ion-icon name="time-outline"></ion-icon>
+                    <div class="info-content">
+                      <span>مدت سفر:</span>
+                      <strong id="tour-duration"></strong>
+                    </div>
+
+                  </div>
+
+
+                  <div class="info-box">
+
+                    <ion-icon name="calendar-outline"></ion-icon>
+
+                    <div class="info-content">
+                      <span>تاریخ شروع:</span>
+                      <strong id="tour-start-date"></strong>
+                    </div>
+
+                  </div>
+
+                  <div class="info-box">
+
+                    <ion-icon name="restaurant-outline"></ion-icon>
+
+                    <div class="info-content">
+                      <span> وعده غذایی: </span>
+                      <strong id="tour-meals"></strong>
+                    </div>
+
+                  </div>
+
+
+                  <!-- <div class="info-box">
+                    <ion-icon name="people-outline"></ion-icon>
+
+                    <div class="info-content">
+                      <span>مناسب برای:</span>
+                      <strong id="tour-suitable"></strong>
+                    </div>
+                  </div> -->
+
+                  </div>
+
+    </section>
+
+    <section class="flight-section reveal">
+
+        <div class="section-header">
+
+            <span class="section-icon">
+                <ion-icon name="airplane-outline"></ion-icon>
+            </span>
+
+            <h2>اطلاعات پرواز</h2>
+
+        </div>
+
+
+        <div class="flight-grid">
+            <article class="flight-card">
+
+                <div class="flight-card-header">
+
+                    <h3>پرواز رفت</h3>
+
+                    <span id="departure-date"></span>
+
+                </div>
+
+
+                <div class="flight-route">
+
+                    <div>
+
+                        <small>مبدأ</small>
+
+                        <strong id="departure-origin"></strong>
+
+                    </div>
+
+                    <ion-icon name="airplane"></ion-icon>
+
+                    <div>
+
+                        <small>مقصد</small>
+
+                        <strong id="departure-destination"></strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="flight-details">
+
+                    <div>
+
+                        <span>ایرلاین:</span>
+
+                        <strong id="departure-airline"></strong>
+
+                    </div>
+
+                    <div>
+
+                        <span>شماره پرواز:</span>
+
+                        <strong id="departure-number"></strong>
+
+                    </div>
+
+                    <div>
+
+                        <span>ساعت حرکت:</span>
+
+                        <strong id="departure-time"></strong>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+            <article class="flight-card">
+
+                <div class="flight-card-header">
+
+                    <h3>پرواز برگشت</h3>
+
+                    <span id="return-date"></span>
+
+                </div>
+
+
+                <div class="flight-route">
+
+                    <div>
+
+                        <small>مبدأ</small>
+
+                        <strong id="return-origin"></strong>
+
+                    </div>
+
+                    <ion-icon name="airplane"></ion-icon>
+
+                    <div>
+
+                        <small>مقصد</small>
+
+                        <strong id="return-destination"></strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="flight-details">
+
+                    <div>
+
+                        <span>ایرلاین:</span>
+
+                        <strong id="return-airline"></strong>
+
+                    </div>
+
+                    <div>
+
+                        <span>شماره پرواز:</span>
+
+                        <strong id="return-number"></strong>
+
+                    </div>
+
+                    <div>
+
+                        <span>ساعت حرکت:</span>
+
+                        <strong id="return-time"></strong>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </section>
+
+    <section class="hotel-section reveal">
+
+
+  <div class="section-header">
+
+
+    <span class="section-icon"><ion-icon name="business-outline"></ion-icon></span>
+
+
+    <h2>
+      هتل محل اقامت
+    </h2>
+
+
+  </div>
+
+  <div class="hotel-card">
+
+    <div class="hotel-gallery" id="hotel-gallery">
+
+      <!-- Images -->
+
+    </div>
+
+    <div class="hotel-content">
+
+
+      <h3 id="hotel-title"></h3>
+
+
+      <div class="hotel-rating">
+
+        <span id="hotel-stars"></span>
+
+      </div>
+
+
+
+      <p id="hotel-description"></p>
+
+
+
+
+      <div class="hotel-location">
+
+
+        <ion-icon name="location-outline"></ion-icon>
+
+
+        <span id="hotel-address"></span>
+
+
+      </div>
+
+
+
+
+    </div>
+
+
+
+  </div>
+
+
+
+    </section>
+
+    <section class="facilities-section reveal">
+
+
+      <div class="section-header">
+
+
+        <span class="section-icon"><ion-icon name="apps-outline"></ion-icon></span>
+
+
+        <h2>
+          امکانات هتل
+        </h2>
+
+
+      </div>
+
+
+
+      <div
+      class="facilities-grid"
+      id="facilities-grid">
+
+
+        <!-- JS Render -->
+
+      </div>
+
+
+
+    </section>
+
+    <section class="features-section reveal">
+
+
+      <div class="section-header">
+
+
+        <span class="section-icon"><ion-icon name="checkmark-circle-outline"></ion-icon></span>
+
+
+        <h2>
+          ویژگی‌های هتل
+        </h2>
+
+
+      </div>
+
+
+
+      <ul
+      class="hotel-features"
+      id="hotel-features">
+
+
+        <!-- JS Render -->
+
+      </ul>
+
+
+
+    </section>
+
+    <section class="itinerary-section reveal">
+
+
+      <div class="section-header">
+
+        <span class="section-icon"><ion-icon name="map-outline"></ion-icon></span>
+
+        <h2>
+          برنامه سفر
+        </h2>
+
+      </div>
+
+
+
+
+      <div class="itinerary-list" id="itinerary-list">
+
+
+        <!-- JS Render -->
+
+
+
+      </div>
+
+
+
+    </section>
+
+
+
+  </div>
+
+  </div>
+
+
+          <aside class="reserve">
+
+            <div class="reserve-card reveal">
+
+              <div class="reserve-eyebrow">بلیط سفر شما</div>
+
+              <div class="reserve-price">
+
+
+                <span>
+                  قیمت تور
+                </span>
+
+
+                <strong id="reserve-price">
+
+                </strong>
+
+
+              </div>
+
+              <div class="reserve-notch reserve-notch-right"></div>
+              <div class="reserve-notch reserve-notch-left"></div>
+
+              <div class="reserve-info">
+
+
+                <div>
+
+                  <ion-icon name="people-outline"></ion-icon>
+
+                  <span>
+                    ظرفیت باقی مانده
+                  </span>
+
+
+                  <strong id="reserve-count"></strong>
+
+
+                </div>
+
+
+              </div>
+
+              <div class="ticket-barcode" aria-hidden="true"></div>
+
+              <button class="reserve-btn">
+
+                رزرو تور
+
+                <ion-icon name="arrow-back-outline"></ion-icon>
+
+              </button>
+
+
+
+
+            </div>
+
+
+
+          </aside>
+
+
+        </div>
+
+      </div>
+
+
+
+
+
+    </section>
+
+
+</main>
+
+<!--  Footer-->
+<footer class="footer">
+
+  <div class="container">
+
+    <div class="footer-container">
+
+      <div class="footer-brand">
+
+        <img src="../assets/images/temp-logo.svg" alt="Velora logo">
+
+        <p>
+          با Velora بهترین تورها را پیدا کنید و تجربه‌هایی
+          فراموش‌نشدنی از سفر بسازید.
+        </p>
+
+        <div class="footer-social">
+
+          <a href="#">
+            <ion-icon name="logo-instagram"></ion-icon>
+          </a>
+
+          <a href="#">
+            <ion-icon name="logo-whatsapp"></ion-icon>
+          </a>
+
+          <a href="#">
+            <ion-icon name="logo-x"></ion-icon>
+          </a>
+
+        </div>
+      </div>
+
+
+
+
+      <div class="footer-column">
+
+        <h3>دسترسی سریع</h3>
+
+        <ul>
+          <li><a href="#">خانه</a></li>
+          <li><a href="#">تورهای داخلی</a></li>
+          <li><a href="#">تورهای خارجی</a></li>
+          <li><a href="#">درباره ما</a></li>
+
+        </ul>
+
+      </div>
+
+      <div class="footer-column">
+        <h3>خدمات ما</h3>
+
+        <ul>
+
+          <li><a href="#">رزرو تور</a></li>
+          <li><a href="#">پشتیبانی مشتریان</a></li>
+          <li><a href="#">قوانین رزرو</a></li>
+          <li><a href="#">سوالات متداول</a></li>
+
+        </ul>
+
+      </div>
+
+      <div class="footer-column contact">
+        <h3>ارتباط با ما</h3>
+        <ul>
+          <li>
+            <ion-icon name="location-outline"></ion-icon>
+            تبریز، ایران
+          </li>
+          <li>
+            <ion-icon name="call-outline"></ion-icon>
+            09398055375
+          </li>
+          <li>
+            <ion-icon name="mail-outline"></ion-icon>
+            velora@gmail.com
+          </li>
+        </ul>
+
+      </div>
+
+    </div>
+
+
+
+    <div class="footer-newsletter">
+
+      <div>
+        <h3>
+          از آخرین تورها باخبر شوید.
+        </h3>
+        <p>
+          پیشنهادهای ویژه سفر را در ایمیل خود دریافت کنید.
+        </p>
+      </div>
+
+      <form>
+        <input type="email" placeholder="ایمیل شما">
+
+        <button type="submit">
+          عضویت
+        </button>
+
+      </form>
+
+
+    </div>
+
+
+
+
+    <div class="footer-bottom">
+
+      <p>
+        © 2026 Velora. تمامی حقوق محفوظ است.
+      </p>
+
+    </div>
+
+  </div>
+
+</footer>
+
+
+
+
+
+
+
+
+  <script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
+
+  <script nomodule src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js"></script>
+  <script src="./details.js" defer></script>
+</body>
+</html>
