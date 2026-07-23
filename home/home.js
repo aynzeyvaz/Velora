@@ -697,101 +697,101 @@ function renderCategories(categories){
 
 // reviews
 
-const reviews = [
-  {
-    id: 1,
-    name: "سارا احمدی",
-    tour: "تور استانبول",
-    rate: 5,
-    text: "رزرو خیلی راحت بود و همه چیز دقیقاً مطابق برنامه انجام شد. تجربه فوق‌العاده‌ای داشتم."
-  },
+// const reviews = [
+//   {
+//     id: 1,
+//     name: "سارا احمدی",
+//     tour: "تور استانبول",
+//     rate: 5,
+//     text: "رزرو خیلی راحت بود و همه چیز دقیقاً مطابق برنامه انجام شد. تجربه فوق‌العاده‌ای داشتم."
+//   },
 
-  {
-    id: 2,
-    name: "علی رضایی",
-    tour: "تور کیش",
-    rate: 5,
-    text: "پشتیبانی ولورا واقعاً عالی بود و در تمام مراحل کنارم بودند."
-  },
+//   {
+//     id: 2,
+//     name: "علی رضایی",
+//     tour: "تور کیش",
+//     rate: 5,
+//     text: "پشتیبانی ولورا واقعاً عالی بود و در تمام مراحل کنارم بودند."
+//   },
 
-  {
-    id: 3,
-    name: "نگار محمدی",
-    tour: "تور دبی",
-    rate: 4,
-    text: "هتل و پرواز کیفیت خیلی خوبی داشت. قطعاً دوباره با ولورا سفر می‌کنم."
-  },
+//   {
+//     id: 3,
+//     name: "نگار محمدی",
+//     tour: "تور دبی",
+//     rate: 4,
+//     text: "هتل و پرواز کیفیت خیلی خوبی داشت. قطعاً دوباره با ولورا سفر می‌کنم."
+//   },
 
-  {
-    id: 4,
-    name: "محمد کریمی",
-    tour: "تور شیراز",
-    rate: 5,
-    text: "هم قیمت مناسب بود هم برنامه سفر دقیق و بدون دردسر پیش رفت."
-  }
-];
+//   {
+//     id: 4,
+//     name: "محمد کریمی",
+//     tour: "تور شیراز",
+//     rate: 5,
+//     text: "هم قیمت مناسب بود هم برنامه سفر دقیق و بدون دردسر پیش رفت."
+//   }
+// ];
 
-function generateStars(rate){
+// function generateStars(rate){
 
-    let stars = "";
+//     let stars = "";
 
-    for(let i = 1; i <= 5; i++){
+//     for(let i = 1; i <= 5; i++){
 
-        stars += `
-            <ion-icon
-                name="${i <= rate ? "star" : "star-outline"}">
-            </ion-icon>
-        `;
+//         stars += `
+//             <ion-icon
+//                 name="${i <= rate ? "star" : "star-outline"}">
+//             </ion-icon>
+//         `;
 
-    }
+//     }
 
-    return stars;
+//     return stars;
 
-}
+// }
 
-const reviewsGrid = document.querySelector(".reviews-grid");
+// const reviewsGrid = document.querySelector(".reviews-grid");
 
-function renderReviews(){
+// function renderReviews(){
 
-    reviewsGrid.innerHTML = "";
+//     reviewsGrid.innerHTML = "";
 
-    reviews.forEach(review => {
+//     reviews.forEach(review => {
 
-        const card = document.createElement("article");
+//         const card = document.createElement("article");
 
-        card.classList.add("review-card", "reveal-item");
+//         card.classList.add("review-card", "reveal-item");
 
-        card.innerHTML = `
+//         card.innerHTML = `
 
-            <div class="review-rating">
+//             <div class="review-rating">
 
-                ${generateStars(review.rate)}
+//                 ${generateStars(review.rate)}
 
-            </div>
+//             </div>
 
-            <p class="review-text">
-                ${review.text}
-            </p>
+//             <p class="review-text">
+//                 ${review.text}
+//             </p>
 
-            <div class="review-user">
+//             <div class="review-user">
 
-                <div class="review-user-info">
+//                 <div class="review-user-info">
 
-                    <h3>${review.name}</h3>
+//                     <h3>${review.name}</h3>
 
-                    <span>${review.tour}</span>
+//                     <span>${review.tour}</span>
 
-                </div>
+//                 </div>
 
-            </div>
+//             </div>
 
-        `;
+//         `;
 
-        reviewsGrid.appendChild(card);
+//         reviewsGrid.appendChild(card);
 
-    });
+//     });
     
-}
+// }
 
 const revealObserver = new IntersectionObserver(
 (entries)=>{
