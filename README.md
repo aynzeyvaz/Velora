@@ -1,6 +1,6 @@
 # Velora
 
-![Python](https://img.shields.io/badge/Python-3.14-3776AB?logo=python&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white)
 ![Django](https://img.shields.io/badge/Django-6.0-092E20?logo=django&logoColor=white)
 ![Django REST Framework](https://img.shields.io/badge/Django_REST_Framework-REST_API-A30000)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=white)
@@ -107,7 +107,7 @@ The backend service is deployed using Render.
 ## Developers 
 
 ### Mohammad
-Backend Developer
+**Backend Developer**
 
 Responsibilities:
 - Backend Development
@@ -115,7 +115,7 @@ Responsibilities:
 - Database modeling
 
 ### Aynaz
-Frontend Developer
+**Frontend Developer**
 
 Responsibilities:
 
