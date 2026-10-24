@@ -1,0 +1,403 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Velora یک وب‌سایت مدرن برای جستجو و رزرو تورهای گردشگری است که به کاربران کمک می‌کند سفرهای خاص و به‌یادماندنی خود را برنامه‌ریزی کنند.">
+  <meta name="title" content="Velora | رزرو تور و تجربه‌های خاص سفر">
+  <title>Velora | رزرو تور و تجربه‌های خاص سفر</title>
+  <link rel="icon" href="{% static 'assets/images/temp-logo.svg' %}">
+  <link rel="stylesheet" href="{% static 'css/style/reset-variables.css' %}">
+  <link rel="stylesheet" href="{% static 'css/footer/footer.css' %}">
+  <link rel="stylesheet" href="{% static 'css/header/resultHeader.css' %}">
+  <link rel="stylesheet" href="{% static 'css/result.css' %}">
+
+</head>
+<body>
+  <div id="preloader">
+  </div>
+
+
+<!-- HEADER -->
+<header class="header" data-header>
+  <div class="container">
+
+    <a href="#" class="logo">
+      <img src="{% static 'assets/images/temp-logo.svg' %}" height="38" alt="logo">
+    </a>
+
+    <nav class="navbar" data-nav>
+      <div class="navbar-top">
+        <a href="#" class="logo">
+          <img src="{% static "assets/images/temp-logo.svg" %}}" height="38" alt="logo">
+        </a>
+
+        <button class="nav-toggle-btn" aria-label="close menu" data-nav-toggler>
+          <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
+
+        </button>
+      </div>
+      <ul class="navbar-list">
+        <li class="navbar-item"><a href="#" class="navbar-link">خانه</a></li>
+
+        <li class="navbar-item has-submenu" data-has-submenu>
+          <div class="navbar-link-wrap">
+            <a href="#" class="navbar-link">تور داخلی</a>
+            <button type="button" class="submenu-toggle" aria-expanded="false" aria-label="نمایش زیرمنو">
+              <ion-icon name="chevron-down-outline"></ion-icon>
+            </button>
+          </div>
+          <ul class="submenu" data-submenu></ul>
+        </li>
+
+        <li class="navbar-item has-submenu" data-has-submenu>
+          <div class="navbar-link-wrap">
+            <a href="#" class="navbar-link">تور خارجی</a>
+            <button type="button" class="submenu-toggle" aria-expanded="false" aria-label="نمایش زیرمنو">
+              <ion-icon name="chevron-down-outline"></ion-icon>
+            </button>
+          </div>
+          <ul class="submenu" data-submenu></ul>
+        </li>
+
+        <li class="navbar-item has-submenu" data-has-submenu>
+          <div class="navbar-link-wrap">
+            <a href="#" class="navbar-link">تور یک روزه</a>
+            <button type="button" class="submenu-toggle" aria-expanded="false" aria-label="نمایش زیرمنو">
+              <ion-icon name="chevron-down-outline"></ion-icon>
+            </button>
+          </div>
+          <ul class="submenu" data-submenu></ul>
+        </li>
+
+        <li class="navbar-item has-submenu" data-has-submenu>
+          <div class="navbar-link-wrap">
+            <a href="#" class="navbar-link">تور ناشناس</a>
+            <button type="button" class="submenu-toggle" aria-expanded="false" aria-label="نمایش زیرمنو">
+              <ion-icon name="chevron-down-outline"></ion-icon>
+            </button>
+          </div>
+          <ul class="submenu" data-submenu></ul>
+        </li>
+      </ul>
+      
+      <div class="header-action">
+        <div class="loggedout">
+          <a href="./auth/login.html" class="btn login-btn"> ورود</a>
+          <a href="./auth/signup.html" class="btn btn-primary">عضویت</a>
+        </div>
+        <div class="loggedin">
+          <a href="#" class="login-btn"> پنل کاربری</a>
+          <a href="#" class="btn btn-primary">خروج </a>
+
+        </div>
+
+      </div>
+      
+
+      <button> </button>
+    </nav>
+
+    <button class="nav-toggle-btn" aria-label="open menu" data-nav-toggler>
+      <ion-icon name="menu-outline" aria-hidden="true"></ion-icon>
+    </button>
+
+    <div class="overlay" data-overlay data-nav-toggler></div>
+  </div>
+</header>
+
+<!--  Main-->
+
+<main>
+   <!-- Hero Section-->
+    <section class="hero" data-hero>
+      <div class="container">
+        <div class="hero-bg hero-bg-fallback active"></div>
+        <div class="hero-bg hero-bg-api"></div>
+        <div class="hero-bg hero-bg-api"></div>
+
+        <div class="hero-overlay"></div>
+        <div class="hero-search">
+
+            <form class="hero-search-box" id="search-form">
+
+              <div class="hero-field">
+                <label for="origin-input"> مبدا</label>
+                <input id="origin-input" name="origin" type="text" placeholder="مبدا">
+              </div>
+
+              <div class="hero-field">
+                <label for="destination-input"> مقصد</label>
+                <input id="destination-input" name="destination" type="text" placeholder="کجا می‌خوای بری؟">
+              </div>
+              
+              <div class="hero-field month-field">
+                <label for="month-input"> تاریخ</label>
+                <input id="month-input" name="month" readonly>
+                <div id="month-modal" class="month-modal">
+                <button type="button" class="month-button" data-month="01"> فروردین</button>
+                <button type="button" class="month-button" data-month="02"> اردیبهشت</button>
+                <button type="button" class="month-button" data-month="03"> خرداد</button>
+                <button type="button" class="month-button" data-month="04"> تیر</button>
+                <button type="button" class="month-button" data-month="05"> مرداد</button>
+                <button type="button" class="month-button" data-month="06"> شهریور</button>
+                <button type="button" class="month-button" data-month="07"> مهر</button>
+                <button type="button" class="month-button" data-month="08"> آبان</button>
+                <button type="button" class="month-button" data-month="09"> آذر</button>
+                <button type="button" class="month-button" data-month="10"> دی</button>
+                <button type="button" class="month-button" data-month="11"> بهمن</button>
+                <button type="button" class="month-button" data-month="12"> اسفند</button>
+              </div>
+
+                
+              </div>
+              
+              <button type="submit" class="search-btn btn"> 
+                 
+                 <span>جستجو</span>
+                 <ion-icon name="search-outline"></ion-icon>
+              </button>
+
+              
+
+          
+            </form>
+           </div>
+
+
+      </div>
+    
+    </section>
+
+
+
+
+    <!-- results -->
+      <section class="result-tours">
+
+        <div class="container">
+          <div class="result-tours-title">
+            <h2 id="result-tours-title-h2"></h2>
+          </div>
+
+          <div class="results-layout">
+
+            <aside class="filters active" data-filters>
+
+              <button class="filter-toggle" data-filter-toggle>
+                <div class="filter-header-right">
+                  <ion-icon name="options-outline"></ion-icon>
+                  <h3>مرتب سازی</h3>
+                </div>
+                <ion-icon class="chevron" name="chevron-down-outline"></ion-icon>
+                
+
+              </button>
+        
+
+              <div class="filter-group">
+
+                <label class="filter-item">
+                  <input type="radio" name="sort" value="default" checked>
+                  <span>پیش فرض</span>
+                </label>
+
+                <label class="filter-item">
+                  <input type="radio" name="sort" value="cheap">
+                  <span>ارزان ترین قیمت</span>
+                </label>
+
+                <label  class="filter-item">
+                  <input type="radio" name="sort" value="expensive">
+                  <span>گران ترین قیمت</span>
+                </label>
+                <label  class="filter-item">
+                  <input type="radio" name="sort" value="longest">
+                  <span>بیشترین مدت زمان</span>
+                </label>
+                <label  class="filter-item">
+                  <input type="radio" name="sort" value="shortest">
+                  <span>کمترین مدت زمان</span>
+                </label>
+                <label  class="filter-item">
+                  <input type="radio" name="sort" value="nearest">
+                  <span>نزدیک ترین تورها </span>
+                </label>
+
+
+              </div>
+
+
+
+            </aside>
+              
+
+            <div class="tours-container">
+              <div class="api-loader">
+                <img src="{% static "assets/images/loading.svg" %}}" alt="loading">
+              </div>
+
+              <div class="tours-grid"></div>
+
+            </div>
+
+
+          </div>
+
+        </div>
+
+        
+
+
+
+
+
+
+
+
+
+      </section>
+
+
+
+</main>
+
+<!--  Footer-->
+<footer class="footer">
+
+  <div class="container">
+
+    <div class="footer-container">
+
+      <div class="footer-brand">
+
+        <img src="../assets/images/temp-logo.svg" alt="Velora logo">
+
+        <p>
+          با Velora بهترین تورها را پیدا کنید و تجربه‌هایی 
+          فراموش‌نشدنی از سفر بسازید.
+        </p>
+
+        <div class="footer-social">
+
+          <a href="#">
+            <ion-icon name="logo-instagram"></ion-icon>
+          </a>
+
+          <a href="#">
+            <ion-icon name="logo-whatsapp"></ion-icon>
+          </a>
+
+          <a href="#">
+            <ion-icon name="logo-x"></ion-icon>
+          </a>
+
+        </div>
+      </div>
+
+
+
+
+      <div class="footer-column">
+
+        <h3>دسترسی سریع</h3>
+
+        <ul>
+          <li><a href="#">خانه</a></li>
+          <li><a href="#">تورهای داخلی</a></li>
+          <li><a href="#">تورهای خارجی</a></li>
+          <li><a href="#">درباره ما</a></li>
+
+        </ul>
+
+      </div>
+
+      <div class="footer-column">
+        <h3>خدمات ما</h3>
+
+        <ul>
+
+          <li><a href="#">رزرو تور</a></li>
+          <li><a href="#">پشتیبانی مشتریان</a></li>
+          <li><a href="#">قوانین رزرو</a></li>
+          <li><a href="#">سوالات متداول</a></li>
+
+        </ul>
+
+      </div>
+
+      <div class="footer-column contact">
+        <h3>ارتباط با ما</h3>
+        <ul>
+          <li>
+            <ion-icon name="location-outline"></ion-icon>
+            تبریز، ایران
+          </li>
+          <li>
+            <ion-icon name="call-outline"></ion-icon>
+            09398055375
+          </li>
+          <li>
+            <ion-icon name="mail-outline"></ion-icon>
+            velora@gmail.com
+          </li>
+        </ul>
+
+      </div>
+
+    </div>
+
+
+
+    <div class="footer-newsletter">
+
+      <div>
+        <h3>
+          از آخرین تورها باخبر شوید.
+        </h3>
+        <p>
+          پیشنهادهای ویژه سفر را در ایمیل خود دریافت کنید.
+        </p>
+      </div>
+
+      <form>
+        <input type="email" placeholder="ایمیل شما">
+
+        <button type="submit">
+          عضویت
+        </button>
+
+      </form>
+
+
+    </div>
+
+
+
+
+    <div class="footer-bottom">
+
+      <p>
+        © 2026 Velora. تمامی حقوق محفوظ است.
+      </p>
+
+    </div>
+
+  </div>
+
+</footer>
+
+
+
+
+
+
+
+
+  <script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
+
+  <script nomodule src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js"></script>
+  <script src="{% static 'js/result.js' %}" defer></script>
+</body>
+</html>
